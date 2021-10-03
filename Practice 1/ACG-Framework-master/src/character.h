@@ -3,7 +3,7 @@
 #include "framework.h"
 #include "animation.h"
 
-#include "game_classes.h"
+//include "game_classes.h"
 
 
 class Character : public Entity {

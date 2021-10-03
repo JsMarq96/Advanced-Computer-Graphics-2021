@@ -1,0 +1,94 @@
+{
+  "main": {
+    "id": "cb6b6cb14651892a",
+    "type": "split",
+    "children": [
+      {
+        "id": "ea69d3a30f1e52e8",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "1-Intro a Visualizacion avanzada.md",
+            "mode": "preview"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1cc0f326df52d562",
+    "type": "split",
+    "children": [
+      {
+        "id": "613c713f0201e3d9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ff3b550621e76b56",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "db6f2006546810d0",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "02426c23ca7000cf",
+    "type": "split",
+    "children": [
+      {
+        "id": "20f0c5dde9ba0a8c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "554c12c6564f7ada",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "1-Intro a Visualizacion avanzada.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "ea69d3a30f1e52e8",
+  "lastOpenFiles": [
+    "1-Intro a Visualizacion avanzada.md",
+    "Untitled.md"
+  ]
+}
