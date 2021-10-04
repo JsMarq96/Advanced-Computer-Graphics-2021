@@ -82,3 +82,48 @@ void WireframeMaterial::render(Mesh* mesh, Matrix44 model, Camera * camera)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
+
+
+// =================
+// CUSTOM MATERIALS
+// =================
+
+// TEXTURED MATERIAL
+// Since the base class already has support for texturing, we just need to 
+// change the shaders
+TexturedMaterial::TexturedMaterial(const char* texture_name) {
+	assert(texture_name != NULL && "Texture of Textured material cannot be null");
+
+	color = vec4(1.f, 1.f, 1.f, 1.f);
+	shader = Shader::Get("data/shaders/basic.vs", "data/shaders/textured.fs");
+	texture = Texture::Get(texture_name);
+}
+TexturedMaterial::~TexturedMaterial() {
+
+}
+
+
+void TexturedMaterial::renderInMenu() {
+	// TODO: Imgui integration
+}
+
+
+// PHONG ILUMNATION MATERIAL
+PhongMaterial::PhongMaterial() {
+	shader = Shader::Get("data/shaders/phong.vs", "data/shaders/phong.fs");
+}
+PhongMaterial::~PhongMaterial(){}
+
+void PhongMaterial::setUniforms(Camera* camera, Matrix44 model) {
+	StandardMaterial::setUniforms(camera, model);
+
+	// Phong essential uniforms
+	shader->setUniform("u_ambient_value", ambient_component);
+	shader->setUniform("u_diffuse_value", diffuse_value);
+	shader->setUniform("u_specular_value", specular_value);
+	shader->setUniform("u_light_color", light_color);
+	shader->setUniform("u_light_position", light_position);
+}
+void PhongMaterial::renderInMenu() {
+	// TODO IMGUI
+}

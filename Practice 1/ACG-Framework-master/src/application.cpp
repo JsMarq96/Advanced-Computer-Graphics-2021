@@ -45,12 +45,13 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 	camera->setPerspective(45.f,window_width/(float)window_height,0.1f,10000.f); //set the projection, we want to be perspective
 
 	{
-		StandardMaterial* mat = new StandardMaterial();
+		PhongMaterial* text_mat = new PhongMaterial();
+		text_mat->color = { 0.0f, 1.0f, 0.0f, 1.0f };
 		SceneNode* node = new SceneNode("Visible node");
 		node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
 		//node->model.scale(5, 5, 5);
-		node->material = mat;
-		mat->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/normal.fs");
+		node->material = text_mat;
+		//mat->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/normal.fs");
 		node_list.push_back(node);
 	}
 	

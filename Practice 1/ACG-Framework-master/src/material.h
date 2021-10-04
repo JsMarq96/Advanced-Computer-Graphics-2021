@@ -39,4 +39,33 @@ public:
 	void render(Mesh* mesh, Matrix44 model, Camera * camera);
 };
 
+
+// =================
+// CUSTOM MATERIALS
+// =================
+
+class TexturedMaterial : public StandardMaterial {
+public:
+	TexturedMaterial(const char* texture_name);
+	~TexturedMaterial();
+
+	void renderInMenu();
+};
+
+class PhongMaterial : public StandardMaterial {
+public:
+	float ambient_component = 0.0f;
+	float diffuse_value = 0.5f;
+	float specular_value = 0.6f;
+
+	Vector4 light_color = {1.0f, 0.0f, 0.0f, 1.0f};
+	Vector3 light_position = {14.0f, 14.0f, 4.0f};
+
+	PhongMaterial();
+	~PhongMaterial();
+
+	void setUniforms(Camera* camera, Matrix44 model);
+	void renderInMenu();
+};
+
 #endif
