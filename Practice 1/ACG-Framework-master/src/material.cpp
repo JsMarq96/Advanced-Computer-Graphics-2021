@@ -130,18 +130,10 @@ void PhongMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	shader->setUniform("u_light_position", scene_light.position);
 }
 void PhongMaterial::renderInMenu() {
-	// TODO IMGUI
 	ImGui::Text("Material properties:");
 	ImGui::ColorEdit3("M Color", (float*)&color);
 	ImGui::SliderFloat("M Ambient", &ambient_value, 0.0f, 1.0f);
 	ImGui::SliderFloat("M Diffuse", &diffuse_value, 0.0f, 1.0f);
 	ImGui::SliderFloat("M Specular", &specular_value, 0.0f, 1.0f);
-	ImGui::SliderFloat("M Shininess", &shiniess, 0.0f, 64.0f);
-
-	ImGui::Separator();
-	ImGui::Text("Light properties:");
-	ImGui::ColorEdit3("L Color", (float*)&scene_light.color);
-	ImGui::SliderFloat("L Ambient", &(scene_light.ambient), 0.0f, 1.0f);
-	ImGui::SliderFloat("L Diffuse", &(scene_light.diffuse), 0.0f, 1.0f);
-	ImGui::SliderFloat("L Specular", &(scene_light.specular), 0.0f, 1.0f);
+	ImGui::SliderFloat("M Shininess", &shiniess, 0.0f, 64.0f);	
 }
