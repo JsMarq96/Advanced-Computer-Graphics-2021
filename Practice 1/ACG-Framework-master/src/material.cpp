@@ -118,12 +118,30 @@ void PhongMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	StandardMaterial::setUniforms(camera, model);
 
 	// Phong essential uniforms
-	shader->setUniform("u_ambient_value", ambient_component);
-	shader->setUniform("u_diffuse_value", diffuse_value);
-	shader->setUniform("u_specular_value", specular_value);
-	shader->setUniform("u_light_color", light_color);
-	shader->setUniform("u_light_position", light_position);
+	shader->setUniform("u_material_ambient", ambient_value);
+	shader->setUniform("u_material_diffuse", diffuse_value);
+	shader->setUniform("u_material_specular", specular_value);
+	shader->setUniform("u_material_shininess", shiniess);
+
+	shader->setUniform("u_light_ambient", scene_light.ambient);
+	shader->setUniform("u_light_diffuse", scene_light.diffuse);
+	shader->setUniform("u_light_specular", scene_light.specular);
+	shader->setUniform("u_light_color", scene_light.color);
+	shader->setUniform("u_light_position", scene_light.position);
 }
 void PhongMaterial::renderInMenu() {
 	// TODO IMGUI
+	ImGui::Text("Material properties:");
+	ImGui::ColorEdit3("M Color", (float*)&color);
+	ImGui::SliderFloat("M Ambient", &ambient_value, 0.0f, 1.0f);
+	ImGui::SliderFloat("M Diffuse", &diffuse_value, 0.0f, 1.0f);
+	ImGui::SliderFloat("M Specular", &specular_value, 0.0f, 1.0f);
+	ImGui::SliderFloat("M Shininess", &shiniess, 0.0f, 64.0f);
+
+	ImGui::Separator();
+	ImGui::Text("Light properties:");
+	ImGui::ColorEdit3("L Color", (float*)&scene_light.color);
+	ImGui::SliderFloat("L Ambient", &(scene_light.ambient), 0.0f, 1.0f);
+	ImGui::SliderFloat("L Diffuse", &(scene_light.diffuse), 0.0f, 1.0f);
+	ImGui::SliderFloat("L Specular", &(scene_light.specular), 0.0f, 1.0f);
 }

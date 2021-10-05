@@ -7,6 +7,10 @@
 #include "mesh.h"
 #include "extra/hdre.h"
 
+#include "scenelight.h"
+
+extern sSceneLight scene_light;
+
 class Material {
 public:
 
@@ -54,12 +58,13 @@ public:
 
 class PhongMaterial : public StandardMaterial {
 public:
-	float ambient_component = 0.0f;
-	float diffuse_value = 0.5f;
-	float specular_value = 0.6f;
+	float ambient_value = 0.5f;
+	float diffuse_value = 0.6f;
+	float specular_value = 0.5f;
+	float shiniess = 32.0f;
 
-	Vector4 light_color = {1.0f, 0.0f, 0.0f, 1.0f};
-	Vector3 light_position = {14.0f, 14.0f, 4.0f};
+	Vector4 light_color = {1.0f, 1.0f, 1.0f, 1.0f};
+	Vector3 light_position = {-14.0f, -14.0f, 14.0f};
 
 	PhongMaterial();
 	~PhongMaterial();
