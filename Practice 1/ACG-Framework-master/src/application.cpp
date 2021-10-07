@@ -60,8 +60,6 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		scene_data.light.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		scene_data.light.position = { 5.0f, 5.0f, 5.0f };
 		
-		//PhongMaterial* text_mat = new PhongMaterial();
-
 		TexturedMaterial* text_mat = new TexturedMaterial("data/blueNoise.png");
 		text_mat->color = { 0.0f, 1.0f, 0.0f, 1.0f };
 		SceneNode* text_node = new SceneNode("Textured node");
