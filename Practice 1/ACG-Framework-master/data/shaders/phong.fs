@@ -26,12 +26,12 @@ void main()
     float ambient_component = u_material_ambient * u_light_ambient;
 
     // Diffuse component
-    float light_dot_norm = dot(light_vector, v_normal);
+    float light_dot_norm = dot(v_normal, light_vector);
     float diffuse_componenet = light_dot_norm * u_material_diffuse * u_light_diffuse;
 
     // Specular compomenet
-    float reflect_dot_view = dot(v_world_position - u_camera_pos , -normalize(reflect(light_vector, v_normal)));
-    reflect_dot_view = clamp(reflect_dot_view, 0.0, 1.0);
+    float reflect_dot_view = dot(normalize(reflect(light_vector, v_normal)), normalize(u_camera_pos - v_world_position));
+    reflect_dot_view = max(reflect_dot_view, 0.0);
 
     float specular_component = pow(reflect_dot_view, u_material_shininess) * u_material_specular * u_light_specular;
 

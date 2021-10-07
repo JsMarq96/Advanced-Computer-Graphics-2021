@@ -65,7 +65,7 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		TexturedMaterial* text_mat = new TexturedMaterial("data/blueNoise.png");
 		text_mat->color = { 0.0f, 1.0f, 0.0f, 1.0f };
 		SceneNode* text_node = new SceneNode("Textured node");
-		text_node->model.setTranslation(-3.0f, 0.0f, 3.0f);
+		text_node->model.setTranslation(-3.0f, 0.0f, 0.0f);
 		text_node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
 		text_node->material = text_mat;
 		node_list.push_back(text_node);
