@@ -13,13 +13,14 @@ uniform float u_light_ambient;
 uniform float u_light_diffuse;
 uniform float u_light_specular;
 uniform vec4 u_light_color;
+uniform vec3 u_light_position;
 
 uniform vec4 u_color;
 uniform vec3 u_camera_pos;
 
 void main()
 {
-	vec3 light_vector = normalize(v_position - v_light_local_position);
+	vec3 light_vector = normalize(u_light_position - v_world_position);
 
     // Ambient component
     float ambient_component = u_material_ambient * u_light_ambient;

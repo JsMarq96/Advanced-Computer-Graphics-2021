@@ -58,15 +58,33 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		scene_data.light.specular = 0.6f;
 		scene_data.light.ambient = 0.3;
 		scene_data.light.color = { 1.0f, 1.0f, 1.0f, 1.0f };
-		scene_data.light.position = { 5.0f, -5.0f, 5.0f };
+		scene_data.light.position = { 5.0f, 5.0f, 5.0f };
 		
 		//PhongMaterial* text_mat = new PhongMaterial();
-		ReflectiveMaterial* text_mat = new ReflectiveMaterial();
-		text_mat->color = { 1.0f, 0.0f, 0.0f, 1.0f };
-		SceneNode* node = new SceneNode("Visible node");
-		node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
-		node->material = text_mat;
-		node_list.push_back(node);
+
+		TexturedMaterial* text_mat = new TexturedMaterial("data/blueNoise.png");
+		text_mat->color = { 0.0f, 1.0f, 0.0f, 1.0f };
+		SceneNode* text_node = new SceneNode("Textured node");
+		text_node->model.setTranslation(-3.0f, 0.0f, 3.0f);
+		text_node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
+		text_node->material = text_mat;
+		node_list.push_back(text_node);
+
+		PhongMaterial* phong_mat = new PhongMaterial();
+		phong_mat->color = { 1.0f, 0.0f, 0.0f, 1.0f };
+		SceneNode* phong_node = new SceneNode("Phong node");
+		phong_node->model.setTranslation(0.0f, 0.0f, 0.0f);
+		phong_node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
+		phong_node->material = phong_mat;
+		node_list.push_back(phong_node);
+
+		ReflectiveMaterial* ref_mat = new ReflectiveMaterial();
+		ref_mat->color = { 0.0f, 0.0f, 1.0f, 1.0f };
+		SceneNode* ref_node = new SceneNode("Reflective node");
+		ref_node->model.setTranslation(3.0f, 0.0f, 0.0f);
+		ref_node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
+		ref_node->material = ref_mat;
+		node_list.push_back(ref_node);
 	}
 	
 	//hide the cursor
