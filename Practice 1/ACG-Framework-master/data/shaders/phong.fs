@@ -30,7 +30,7 @@ void main()
 
     // Specular compomenet
     float reflect_dot_view = dot(v_world_position - u_camera_pos , -normalize(reflect(light_vector, v_normal)));
-    reflect_dot_view = clamp(reflect_dot_view, 0.0, 255.0);
+    reflect_dot_view = clamp(reflect_dot_view, 0.0, 1.0);
 
     float specular_component = pow(reflect_dot_view, u_material_shininess) * u_material_specular * u_light_specular;
 

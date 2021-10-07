@@ -106,6 +106,9 @@
     <ClCompile Include="..\..\src\extra\pvmparser.cpp">
       <Filter>extra</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\skybox_node.cpp">
+      <Filter>gfx</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\camera.h" />
@@ -215,6 +218,10 @@
     <ClInclude Include="..\..\src\scenelight.h">
       <Filter>gfx</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\..\src\skybox_node.h">
+      <Filter>gfx</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="extra">
@@ -232,5 +239,8 @@
     <Filter Include="extra\imgui">
       <UniqueIdentifier>{82a43214-a04a-466f-9f66-6d4e78e6772c}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="framework.rc" />
   </ItemGroup>
 </Project>

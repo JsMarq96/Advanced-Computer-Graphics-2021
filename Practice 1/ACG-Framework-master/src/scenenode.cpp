@@ -24,8 +24,9 @@ SceneNode::~SceneNode()
 
 void SceneNode::render(Camera* camera)
 {
-	if (material)
+	if (material) {
 		material->render(mesh, model, camera);
+	}
 }
 
 void SceneNode::renderWireframe(Camera* camera)

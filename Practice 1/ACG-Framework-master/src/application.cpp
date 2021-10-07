@@ -14,6 +14,7 @@
 
 #include <cmath>
 #include "scenelight.h"
+#include "skybox_node.h"
 
 bool render_wireframe = false;
 Camera* Application::camera = nullptr;
@@ -51,6 +52,9 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 
 	// Scene setup
 	{
+		SkyboxNode* skybox_node = new SkyboxNode();
+		node_list.push_back(skybox_node);
+
 		// Light setup
 		scene_light.diffuse = 0.5f;// { 1.0f, 1.0f, 1.0f };
 		scene_light.specular = 0.6f;// { 1.0f, 1.0f, 1.0f };
@@ -64,8 +68,8 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
 		//node->model.scale(5, 5, 5);
 		node->material = text_mat;
-		//mat->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/normal.fs");
 		node_list.push_back(node);
+		//mat->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/normal.fs");
 	}
 	
 	//hide the cursor

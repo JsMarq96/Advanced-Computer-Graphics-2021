@@ -104,7 +104,7 @@ TexturedMaterial::~TexturedMaterial() {
 
 
 void TexturedMaterial::renderInMenu() {
-	// TODO: Imgui integration
+	ImGui::ColorEdit3("Base color", (float*)&color);
 }
 
 
@@ -131,9 +131,28 @@ void PhongMaterial::setUniforms(Camera* camera, Matrix44 model) {
 }
 void PhongMaterial::renderInMenu() {
 	ImGui::Text("Material properties:");
-	ImGui::ColorEdit3("M Color", (float*)&color);
-	ImGui::SliderFloat("M Ambient", &ambient_value, 0.0f, 1.0f);
-	ImGui::SliderFloat("M Diffuse", &diffuse_value, 0.0f, 1.0f);
-	ImGui::SliderFloat("M Specular", &specular_value, 0.0f, 1.0f);
-	ImGui::SliderFloat("M Shininess", &shiniess, 0.0f, 64.0f);	
+	ImGui::ColorEdit3("Color", (float*)&color);
+	ImGui::SliderFloat("Ambient", &ambient_value, 0.0f, 1.0f);
+	ImGui::SliderFloat("Diffuse", &diffuse_value, 0.0f, 1.0f);
+	ImGui::SliderFloat("Specular", &specular_value, 0.0f, 1.0f);
+	ImGui::SliderFloat("Shininess", &shiniess, 0.0f, 64.0f);	
 }
+
+
+// SKYBOX MATERIAL
+SkyBoxMaterial::SkyBoxMaterial() {
+	texture = new Texture();
+
+	shader = Shader::Get("data/shaders/basic.vs", "data/shaders/skybox.fs");
+}
+SkyBoxMaterial::~SkyBoxMaterial() {
+	delete texture;
+}
+
+void SkyBoxMaterial::setCubemapTexture(const char* cubemap_dir) {
+	// Note, the clear does not free the memmory of cubemaps causing a memmory leak
+	texture->clear();
+	texture->cubemapFromImages(cubemap_dir);
+}
+
+void SkyBoxMaterial::renderInMenu() {}

@@ -73,4 +73,14 @@ public:
 	void renderInMenu();
 };
 
+class SkyBoxMaterial : public StandardMaterial {
+public:
+	SkyBoxMaterial();
+	~SkyBoxMaterial();
+
+	void setCubemapTexture(const char* texture);
+
+	void renderInMenu();
+};
+
 #endif
