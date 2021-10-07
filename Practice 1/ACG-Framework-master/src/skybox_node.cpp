@@ -7,8 +7,6 @@ SkyboxNode::SkyboxNode() {
 
 	mesh->createCube();
 
-	//model.setScale(10.0f, 10.0f, 10.0f);
-
 	((SkyBoxMaterial*)material)->setCubemapTexture(SKYBOXES[0]);
 
 	this->name = "Skybox";
@@ -26,6 +24,7 @@ void SkyboxNode::setCubemap(const char* cubemap_folder) {
 }
 
 void SkyboxNode::render(Camera* camera) {
+	// Move the box of the skybox to the current camera position
 	model.setTranslation(camera->eye.x, camera->eye.y, camera->eye.z);
 
 	if (material) {

@@ -7,9 +7,9 @@
 #include "mesh.h"
 #include "extra/hdre.h"
 
-#include "scenelight.h"
+#include "scene_data.h"
 
-extern sSceneLight scene_light;
+extern sSceneData scene_data;
 
 class Material {
 public:
@@ -80,6 +80,16 @@ public:
 
 	void setCubemapTexture(const char* texture);
 
+	void renderInMenu();
+};
+
+class ReflectiveMaterial : public StandardMaterial {
+public:
+	float reflectiveness = 0.6f;
+
+	ReflectiveMaterial();
+
+	void setUniforms(Camera* camera, Matrix44 model);
 	void renderInMenu();
 };
 

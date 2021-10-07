@@ -215,7 +215,7 @@
     <ClInclude Include="..\..\src\extra\directory_watcher.h">
       <Filter>extra</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\scenelight.h">
+    <ClInclude Include="..\..\src\scene_data.h">
       <Filter>gfx</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />

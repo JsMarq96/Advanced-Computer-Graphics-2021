@@ -123,11 +123,11 @@ void PhongMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	shader->setUniform("u_material_specular", specular_value);
 	shader->setUniform("u_material_shininess", shiniess);
 
-	shader->setUniform("u_light_ambient", scene_light.ambient);
-	shader->setUniform("u_light_diffuse", scene_light.diffuse);
-	shader->setUniform("u_light_specular", scene_light.specular);
-	shader->setUniform("u_light_color", scene_light.color);
-	shader->setUniform("u_light_position", scene_light.position);
+	shader->setUniform("u_light_ambient", scene_data.light.ambient);
+	shader->setUniform("u_light_diffuse", scene_data.light.diffuse);
+	shader->setUniform("u_light_specular", scene_data.light.specular);
+	shader->setUniform("u_light_color", scene_data.light.color);
+	shader->setUniform("u_light_position", scene_data.light.position);
 }
 void PhongMaterial::renderInMenu() {
 	ImGui::Text("Material properties:");
@@ -153,6 +153,26 @@ void SkyBoxMaterial::setCubemapTexture(const char* cubemap_dir) {
 	// Note, the clear does not free the memmory of cubemaps causing a memmory leak
 	texture->clear();
 	texture->cubemapFromImages(cubemap_dir);
+	scene_data.enviorment_cubemap = texture;
 }
 
 void SkyBoxMaterial::renderInMenu() {}
+
+
+// REFLECTIVE MATERIAL
+ReflectiveMaterial::ReflectiveMaterial() {
+	shader = Shader::Get("data/shaders/basic.vs", "data/shaders/reflective.fs");
+}
+
+void ReflectiveMaterial::setUniforms(Camera* camera, Matrix44 model) {
+	// Set the current texture as the shared cubemap
+	texture = scene_data.enviorment_cubemap;
+
+	shader->setUniform("u_reflectiveness", reflectiveness);
+	
+	StandardMaterial::setUniforms(camera, model);
+}
+
+void ReflectiveMaterial::renderInMenu() {
+	ImGui::SliderFloat("Reflectiveness", &reflectiveness, 0.0f, 1.0f);
+}

@@ -13,14 +13,14 @@
 #include "extra/imgui/imgui_impl_opengl3.h"
 
 #include <cmath>
-#include "scenelight.h"
+#include "scene_data.h"
 #include "skybox_node.h"
 
 bool render_wireframe = false;
 Camera* Application::camera = nullptr;
 Application* Application::instance = NULL;
 
-sSceneLight scene_light;
+sSceneData scene_data;
 
 Application::Application(int window_width, int window_height, SDL_Window* window)
 {
@@ -48,28 +48,25 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 	camera->lookAt(Vector3(5.f, 5.f, 5.f), Vector3(0.f, 0.0f, 0.f), Vector3(0.f, 1.f, 0.f));
 	camera->setPerspective(45.f,window_width/(float)window_height,0.1f,10000.f); //set the projection, we want to be perspective
 
-	sSceneLight curr_light();
-
 	// Scene setup
 	{
 		SkyboxNode* skybox_node = new SkyboxNode();
 		node_list.push_back(skybox_node);
 
 		// Light setup
-		scene_light.diffuse = 0.5f;// { 1.0f, 1.0f, 1.0f };
-		scene_light.specular = 0.6f;// { 1.0f, 1.0f, 1.0f };
-		scene_light.ambient = 0.3;// { 0.25f, 0.25f, 0.25f };
-		scene_light.color = { 1.0f, 1.0f, 1.0f, 1.0f };
-		scene_light.position = { 5.0f, -5.0f, 5.0f };
+		scene_data.light.diffuse = 0.5f;
+		scene_data.light.specular = 0.6f;
+		scene_data.light.ambient = 0.3;
+		scene_data.light.color = { 1.0f, 1.0f, 1.0f, 1.0f };
+		scene_data.light.position = { 5.0f, -5.0f, 5.0f };
 		
-		PhongMaterial* text_mat = new PhongMaterial();
+		//PhongMaterial* text_mat = new PhongMaterial();
+		ReflectiveMaterial* text_mat = new ReflectiveMaterial();
 		text_mat->color = { 1.0f, 0.0f, 0.0f, 1.0f };
 		SceneNode* node = new SceneNode("Visible node");
 		node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
-		//node->model.scale(5, 5, 5);
 		node->material = text_mat;
 		node_list.push_back(node);
-		//mat->shader = Shader::Get("data/shaders/basic.vs", "data/shaders/normal.fs");
 	}
 	
 	//hide the cursor

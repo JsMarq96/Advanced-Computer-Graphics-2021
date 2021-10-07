@@ -17,9 +17,9 @@
 #include "application.h"
 #include "extra/directory_watcher.h"
 
-#include "scenelight.h"
+#include "scene_data.h"
 
-extern sSceneLight scene_light;
+extern sSceneData scene_data;
 
 #include <iostream> //to output
 
@@ -104,11 +104,11 @@ void renderGUI(SDL_Window* window, Application * game)
 		ImGui::Text(getGPUStats().c_str());					   // Display some text (you can use a format strings too)
 		
 		if (ImGui::TreeNode("Scene")) {
-			ImGui::DragFloat3("Light Position", (float*)&scene_light.position);
-			ImGui::ColorEdit3("Light Color", (float*)&scene_light.color);
-			ImGui::SliderFloat("Light Ambient", &(scene_light.ambient), 0.0f, 1.0f);
-			ImGui::SliderFloat("Light Diffuse", &(scene_light.diffuse), 0.0f, 1.0f);
-			ImGui::SliderFloat("Light Specular", &(scene_light.specular), 0.0f, 1.0f);
+			ImGui::DragFloat3("Light Position", (float*)&scene_data.light.position);
+			ImGui::ColorEdit3("Light Color", (float*)&scene_data.light.color);
+			ImGui::SliderFloat("Light Ambient", &(scene_data.light.ambient), 0.0f, 1.0f);
+			ImGui::SliderFloat("Light Diffuse", &(scene_data.light.diffuse), 0.0f, 1.0f);
+			ImGui::SliderFloat("Light Specular", &(scene_data.light.specular), 0.0f, 1.0f);
 			ImGui::DragFloat("Exposure", &Application::instance->scene_exposure, 0.01f,-2, 2);
 			ImGui::Combo("Output", &Application::instance->output, "COMPLETE\0ALBEDO\0ROUGHNESS\0\METALNESS\0NORMALS\0");
 			ImGui::TreePop();

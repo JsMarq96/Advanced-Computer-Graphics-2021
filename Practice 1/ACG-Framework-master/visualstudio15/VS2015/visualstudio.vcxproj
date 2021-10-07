@@ -222,7 +222,7 @@
     <ClInclude Include="..\..\src\texture.h" />
     <ClInclude Include="..\..\src\utils.h" />
     <ClInclude Include="..\..\src\volume.h" />
-    <ClInclude Include="..\..\src\scenelight.h">
+    <ClInclude Include="..\..\src\scene_data.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="resource.h" />
