@@ -15,8 +15,6 @@ public:
 
 	SkyboxNode();
 	~SkyboxNode();
-
-	void setCubemap(const char* cubemap_folder);
 	
 	void render(Camera* camera);
 	void renderInMenu();

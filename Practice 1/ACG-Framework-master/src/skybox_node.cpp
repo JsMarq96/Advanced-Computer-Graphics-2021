@@ -16,13 +16,6 @@ SkyboxNode::~SkyboxNode() {
 	delete mesh;
 }
 
-void SkyboxNode::setCubemap(const char* cubemap_folder) {
-	if (material->texture->width > 0) {
-		material->texture->unbind();
-	}
-	((SkyBoxMaterial*)material)->setCubemapTexture(cubemap_folder);
-}
-
 void SkyboxNode::render(Camera* camera) {
 	// Move the box of the skybox to the current camera position
 	model.setTranslation(camera->eye.x, camera->eye.y, camera->eye.z);

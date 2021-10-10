@@ -13,8 +13,6 @@ uniform vec3 u_light_position;
 varying vec3 v_position;
 varying vec3 v_world_position;
 varying vec3 v_normal;
-varying vec3 v_light_local_position;
-varying vec3 v_local_camera_pos;
 
 void main()
 {	
@@ -26,11 +24,6 @@ void main()
 	v_world_position = (u_model * vec4( v_position, 1.0) ).xyz;
 	
 	mat4 inverse_model = inverse(u_model);
-
-    // Get the local position of the light via inversing the model transform
-    v_light_local_position = (inverse_model * vec4(u_light_position, 1.0)).xyz;
-
-	v_local_camera_pos = (inverse_model * vec4(u_camera_pos, 1.0)).xyz;
 
 	//calcule the position of the vertex using the matrices
 	gl_Position = u_viewprojection * vec4( v_world_position, 1.0 );
