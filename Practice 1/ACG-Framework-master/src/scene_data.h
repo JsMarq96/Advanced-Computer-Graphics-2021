@@ -8,9 +8,9 @@ struct sSceneData {
 	struct {
 		Vector3 position = { 5.0f, 5.0f, 5.0f };
 		Vector4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
-		float diffuse;
-		float specular;
-		float ambient;
+		Vector3 diffuse;
+		Vector3 specular;
+		Vector3 ambient;
 	} light;
 	
 	Texture* enviorment_cubemap = NULL;

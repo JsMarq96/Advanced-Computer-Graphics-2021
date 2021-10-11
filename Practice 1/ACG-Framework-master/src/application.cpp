@@ -54,14 +54,12 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		node_list.push_back(skybox_node);
 
 		// Light setup
-		scene_data.light.diffuse = 0.5f;
-		scene_data.light.specular = 0.6f;
-		scene_data.light.ambient = 0.3;
+		scene_data.light.diffuse = Vector3{ 1.0f, 1.0f, 1.0f } * 0.5f;
+		scene_data.light.specular = Vector3{ 1.0f, 1.0f, 1.0f } * 0.6f;
+		scene_data.light.ambient = Vector3{ 1.0f, 1.0f, 1.0f } * 0.3;
 		scene_data.light.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		scene_data.light.position = { 5.0f, 5.0f, 5.0f };
 		
-		//PhongMaterial* text_mat = new PhongMaterial();
-
 		TexturedMaterial* text_mat = new TexturedMaterial("data/blueNoise.png");
 		text_mat->color = { 0.0f, 1.0f, 0.0f, 1.0f };
 		SceneNode* text_node = new SceneNode("Textured node");
@@ -79,7 +77,7 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		node_list.push_back(phong_node);
 
 		ReflectiveMaterial* ref_mat = new ReflectiveMaterial();
-		ref_mat->color = { 0.0f, 0.0f, 1.0f, 1.0f };
+		ref_mat->color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		SceneNode* ref_node = new SceneNode("Reflective node");
 		ref_node->model.setTranslation(3.0f, 0.0f, 0.0f);
 		ref_node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
