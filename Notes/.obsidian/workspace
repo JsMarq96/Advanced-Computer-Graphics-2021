@@ -9,8 +9,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "3-PBR IBL.md",
-            "mode": "source"
+            "file": "2-PBR.md",
+            "mode": "preview"
           }
         }
       }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3-PBR IBL.md",
+                "file": "2-PBR.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,8 +88,9 @@
   },
   "active": "ea69d3a30f1e52e8",
   "lastOpenFiles": [
-    "Untitled.md",
     "2-PBR.md",
+    "3-PBR IBL.md",
+    "Untitled.md",
     "1-Intro a Visualizacion avanzada.md"
   ]
 }
