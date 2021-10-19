@@ -113,9 +113,14 @@ public:
 	Texture* metalness_map = NULL;
 	Texture* brdf_LUT = NULL;
 
-	PBRMaterial();
+	int render_output = 0;
+
+	PBRMaterial(const char*   albedo_dir, 
+				const char*   roughness_dir, 
+				const char*   metalness_dir);
 	~PBRMaterial();
 
 	void setUniforms(Camera* camera, Matrix44 model);
+	void renderInMenu();
 };
 #endif

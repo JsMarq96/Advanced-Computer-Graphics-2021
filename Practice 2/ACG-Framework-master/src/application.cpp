@@ -61,14 +61,12 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		scene_data.light.ambient = Vector3{ 1.0f, 1.0f, 1.0f } * 0.3;
 		scene_data.light.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		scene_data.light.position = { 5.0f, 5.0f, 5.0f };
-		
-		TexturedMaterial* text_mat = new TexturedMaterial("data/blueNoise.png");
-		text_mat->color = { 0.0f, 1.0f, 0.0f, 1.0f };
-		SceneNode* text_node = new SceneNode("Textured node");
-		text_node->model.setTranslation(-3.0f, 0.0f, 0.0f);
-		text_node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
-		text_node->material = text_mat;
-		node_list.push_back(text_node);
+
+		PBRMaterial* pbr_mat = new PBRMaterial("data/models/bench/albedo.png", "data/models/bench/roughness.png", "data/models/bench/metalness.png");
+		SceneNode* helmet = new SceneNode("PBR node");
+		helmet->mesh = Mesh::Get("data/models/bench/bench.obj.mbin");
+		helmet->material = pbr_mat;
+		node_list.push_back(helmet);
 	}
 	
 	//hide the cursor

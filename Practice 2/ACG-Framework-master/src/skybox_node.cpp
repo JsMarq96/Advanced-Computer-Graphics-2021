@@ -73,5 +73,5 @@ void HDReSkyboxNode::renderInMenu() {
 	}
 
 	ImGui::Text("Visualization only:");
-	ImGui::SliderInt("Blur level", &((HDReMaterial*)material)->display_level, 0, 5);
+	ImGui::SliderInt("Blur level", &((HDReMaterial*)material)->display_level, 0, 6);
 }

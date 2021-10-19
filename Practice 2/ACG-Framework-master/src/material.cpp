@@ -202,15 +202,31 @@ void HDReMaterial::setUniforms(Camera* camera, Matrix44 model) {
 
 
 // PBR MATERIAL
-PBRMaterial::PBRMaterial() {}
-PBRMaterial::~PBRMaterial() {}
+PBRMaterial::PBRMaterial(const char* albedo_dir,
+						 const char* roughness_dir,
+						 const char* metalness_dir) {
+	albedo_map = Texture::Get(albedo_dir);
+	roughness_map = Texture::Get(roughness_dir);
+	metalness_map = Texture::Get(metalness_dir);
+	brdf_LUT = Texture::Get("data/brdfLUT.png");
+
+	shader = Shader::Get("data/shaders/IBL.vs", "data/shaders/IBL.fs");
+}
+PBRMaterial::~PBRMaterial() {
+}
 
 void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
+	StandardMaterial::setUniforms(camera, model);
+
 	// Upload all the textures for the IBL calculations
 	Texture* text = new Texture();
+
+	text->cubemapFromHDRE(scene_data.enviorment_HDRE, 0);
+	shader->setTexture("u_texture_enviorment", text);
+
 	char text_name[] = "u_texture_prem_0";
 	int text_size = strlen(text_name);
-	for (int level = 0; level < 5; level++) {
+	for (int level = 1; level < 6; level++) {
 		text->cubemapFromHDRE(scene_data.enviorment_HDRE, level);
 
 		shader->setTexture(text_name, text);
@@ -224,5 +240,10 @@ void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	shader->setTexture("u_metalness_map", metalness_map);
 	shader->setTexture("u_brdf_LUT", brdf_LUT);
 
-	StandardMaterial::setUniforms(camera, model);
+	shader->setUniform("u_output_mode", render_output);
+	std::cout << render_output << std::endl;
+}
+
+void PBRMaterial::renderInMenu() {
+	ImGui::Combo("Render output:", (int*)&render_output, "Color\0Diffuse\0Roughness\0Metalness\0");
 }
