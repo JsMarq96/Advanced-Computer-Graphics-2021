@@ -93,4 +93,29 @@ public:
 	void renderInMenu();
 };
 
+class HDReMaterial : public StandardMaterial {
+public:
+	HDRE* curr_hdre = NULL;
+	int display_level = 0;
+
+	HDReMaterial();
+
+	void setHDReTexture(const char* dir);
+	void setUniforms(Camera* camera, Matrix44 model);
+	void renderInMenu();
+};
+
+
+class PBRMaterial : public StandardMaterial {
+public:
+	Texture* albedo_map = NULL;
+	Texture* roughness_map = NULL;
+	Texture* metalness_map = NULL;
+	Texture* brdf_LUT = NULL;
+
+	PBRMaterial();
+	~PBRMaterial();
+
+	void setUniforms(Camera* camera, Matrix44 model);
+};
 #endif

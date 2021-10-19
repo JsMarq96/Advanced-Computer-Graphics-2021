@@ -176,3 +176,52 @@ void ReflectiveMaterial::setUniforms(Camera* camera, Matrix44 model) {
 void ReflectiveMaterial::renderInMenu() {
 	ImGui::SliderFloat("Reflectiveness", &reflectiveness, 0.0f, 1.0f);
 }
+
+// HDRe MATERIAL
+HDReMaterial::HDReMaterial() {}
+
+void HDReMaterial::setHDReTexture(const char* dir) {
+	curr_hdre = HDRE::Get(dir);
+	scene_data.enviorment_HDRE = curr_hdre;
+}
+
+void HDReMaterial::setUniforms(Camera* camera, Matrix44 model) {
+	Texture* text = new Texture();
+
+	text->cubemapFromHDRE(curr_hdre, display_level);
+	shader->setTexture("u_texture", text);
+
+	delete text;
+	StandardMaterial::setUniforms(camera, model);
+}
+
+void HDReMaterial::renderInMenu() {
+	ImGui::SliderInt("Blur level", &display_level, 0, 5);
+}
+
+
+// PBR MATERIAL
+PBRMaterial::PBRMaterial() {}
+PBRMaterial::~PBRMaterial() {}
+
+void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
+	// Upload all the textures for the IBL calculations
+	Texture* text = new Texture();
+	char text_name[] = "u_texture_prem_0";
+	int text_size = strlen(text_name);
+	for (int level = 0; level < 5; level++) {
+		text->cubemapFromHDRE(scene_data.enviorment_HDRE, level);
+
+		shader->setTexture(text_name, text);
+		text_name[text_size - 1]++;
+	}
+	delete text;
+
+	// Upload PBR texteure maps
+	shader->setTexture("u_albedo_map", albedo_map);
+	shader->setTexture("u_roughness_map", roughness_map);
+	shader->setTexture("u_metalness_map", metalness_map);
+	shader->setTexture("u_brdf_LUT", brdf_LUT);
+
+	StandardMaterial::setUniforms(camera, model);
+}
