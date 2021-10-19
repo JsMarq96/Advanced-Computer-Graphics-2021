@@ -66,7 +66,7 @@ vec3 FresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
 // CUSTOM FUNCTIONS ===============
 sVectors computeVectors() {
     sVectors result;
-    result.normal = normalize(v_normal); // TODO: change for normal map?
+    result.normal = normalize(v_normal);
     result.view = normalize(v_world_position - u_camera_position);
     result.light = normalize(v_world_position - u_light_position);
     result.reflect = normalize(reflect(v_world_position, result.normal));
@@ -97,9 +97,12 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     // IBL
     vec2 LUT_brdf = texture2D(u_brdf_LUT, vec2(vects.n_dot_v, mat_props.roughness)).rg;
     vec3 fresnel = FresnelSchlickRoughness(vects.n_dot_v, mat_props.specular_color, mat_props.roughness);
-    vec3 specular_IBL = (fresnel * (LUT_brdf.r + LUT_brdf.g)) * getReflectionColor(vects.reflect, mat_props.roughness);
+    //vec3 specular_IBL = (fresnel * (LUT_brdf.r + LUT_brdf.g)) * getReflectionColor(vects.reflect, mat_props.roughness);
+    vec3 specular_IBL = getReflectionColor(vects.reflect, mat_props.roughness);
 
-    return specular_IBL;
+    vec3 diffuse_IBL = textureCube(u_texture_enviorment, vects.reflect).rgb;
+    //vec3 diffuse_IBL = mat_props.diffuse_color * textureCube(u_texture_enviorment, vects.normal).rgb;
+    return diffuse_IBL;
 }
 
 void main() {

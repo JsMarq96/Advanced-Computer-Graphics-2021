@@ -220,16 +220,17 @@ void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
 
 	// Upload all the textures for the IBL calculations
 	Texture* text = new Texture();
-
 	text->cubemapFromHDRE(scene_data.enviorment_HDRE, 0);
 	shader->setTexture("u_texture_enviorment", text);
 
 	char text_name[] = "u_texture_prem_0";
 	int text_size = strlen(text_name);
 	for (int level = 1; level < 6; level++) {
-		text->cubemapFromHDRE(scene_data.enviorment_HDRE, level);
+		Texture* tex = new Texture();
+		tex->cubemapFromHDRE(scene_data.enviorment_HDRE, level);
 
-		shader->setTexture(text_name, text);
+		shader->setTexture(text_name, tex);
+		delete tex;
 		text_name[text_size - 1]++;
 	}
 	delete text;
