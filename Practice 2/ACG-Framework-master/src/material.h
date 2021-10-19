@@ -99,10 +99,10 @@ public:
 	int display_level = 0;
 
 	HDReMaterial();
+	~HDReMaterial();
 
 	void setHDReTexture(const char* dir);
 	void setUniforms(Camera* camera, Matrix44 model);
-	void renderInMenu();
 };
 
 

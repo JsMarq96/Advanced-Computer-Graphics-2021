@@ -178,7 +178,15 @@ void ReflectiveMaterial::renderInMenu() {
 }
 
 // HDRe MATERIAL
-HDReMaterial::HDReMaterial() {}
+HDReMaterial::HDReMaterial() {
+	texture = new Texture();
+
+	shader = Shader::Get("data/shaders/basic.vs", "data/shaders/skybox.fs");
+}
+
+HDReMaterial::~HDReMaterial() {
+	delete texture;
+}
 
 void HDReMaterial::setHDReTexture(const char* dir) {
 	curr_hdre = HDRE::Get(dir);
@@ -186,17 +194,10 @@ void HDReMaterial::setHDReTexture(const char* dir) {
 }
 
 void HDReMaterial::setUniforms(Camera* camera, Matrix44 model) {
-	Texture* text = new Texture();
+	texture->cubemapFromHDRE(curr_hdre, display_level);
+	shader->setTexture("u_texture", texture);
 
-	text->cubemapFromHDRE(curr_hdre, display_level);
-	shader->setTexture("u_texture", text);
-
-	delete text;
 	StandardMaterial::setUniforms(camera, model);
-}
-
-void HDReMaterial::renderInMenu() {
-	ImGui::SliderInt("Blur level", &display_level, 0, 5);
 }
 
 

@@ -39,8 +39,20 @@ void SkyboxNode::renderInMenu() {
 
 // HDReSkybox methods ===============
 
-HDReSkyboxNode::HDReSkyboxNode() {}
-HDReSkyboxNode::~HDReSkyboxNode() {}
+HDReSkyboxNode::HDReSkyboxNode() {
+	material = new HDReMaterial();
+	mesh = new Mesh();
+
+	mesh->createCube();
+
+	((HDReMaterial*)material)->setHDReTexture(HDREs[0]);
+
+	this->name = "HDRe Skybox";
+}
+HDReSkyboxNode::~HDReSkyboxNode() {
+	delete material;
+	delete mesh;
+}
 
 void HDReSkyboxNode::render(Camera* camera) {
 	// Move the box of the skybox to the current camera position
@@ -54,9 +66,12 @@ void HDReSkyboxNode::render(Camera* camera) {
 }
 void HDReSkyboxNode::renderInMenu() {
 	bool has_changed = false;
-	has_changed |= ImGui::Combo("Select", &hdre_id, "Panorama\0Pisa\0Studio\0");
+	has_changed |= ImGui::Combo("Select", &hdre_id, "Panorama\0Pisa\0Studio\0San Giuseppe Brigde\0TV studio\0");
 
 	if (has_changed) {
 		((HDReMaterial*)material)->setHDReTexture(HDREs[hdre_id]);
 	}
+
+	ImGui::Text("Visualization only:");
+	ImGui::SliderInt("Blur level", &((HDReMaterial*)material)->display_level, 0, 5);
 }

@@ -9,10 +9,12 @@ static const char* SKYBOXES[3] = {
 	"data/environments/snow"
 };
 
-static const char* HDREs[3] = {
+static const char* HDREs[5] = {
 	"data/environments/panorama.hdre",
 	"data/environments/pisa.hdre",
-	"data/environments/studio.hdre"
+	"data/environments/studio.hdre",
+	"data/environments/san_giuseppe_bridge.hdre",
+	"data/environments/tv_studio.hdre"
 };
 
 class SkyboxNode : public SceneNode {

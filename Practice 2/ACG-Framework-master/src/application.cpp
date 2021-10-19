@@ -51,8 +51,10 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 	// Scene setup
 	{
 		SkyboxNode* skybox_node = new SkyboxNode();
-		node_list.push_back(skybox_node);
+		//node_list.push_back(skybox_node);
 
+		HDReSkyboxNode* skybox = new HDReSkyboxNode();
+		node_list.push_back(skybox);
 		// Light setup
 		scene_data.light.diffuse = Vector3{ 1.0f, 1.0f, 1.0f } * 0.5f;
 		scene_data.light.specular = Vector3{ 1.0f, 1.0f, 1.0f } * 0.6f;
@@ -67,22 +69,6 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		text_node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
 		text_node->material = text_mat;
 		node_list.push_back(text_node);
-
-		PhongMaterial* phong_mat = new PhongMaterial();
-		phong_mat->color = { 1.0f, 0.0f, 0.0f, 1.0f };
-		SceneNode* phong_node = new SceneNode("Phong node");
-		phong_node->model.setTranslation(0.0f, 0.0f, 0.0f);
-		phong_node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
-		phong_node->material = phong_mat;
-		node_list.push_back(phong_node);
-
-		ReflectiveMaterial* ref_mat = new ReflectiveMaterial();
-		ref_mat->color = { 1.0f, 1.0f, 1.0f, 1.0f };
-		SceneNode* ref_node = new SceneNode("Reflective node");
-		ref_node->model.setTranslation(3.0f, 0.0f, 0.0f);
-		ref_node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
-		ref_node->material = ref_mat;
-		node_list.push_back(ref_node);
 	}
 	
 	//hide the cursor
