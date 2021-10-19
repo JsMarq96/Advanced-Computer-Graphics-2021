@@ -5,6 +5,7 @@ varying vec2 v_uv;
 uniform vec3 u_light_position;
 uniform vec3 u_camera_position;
 
+// Material maps
 uniform sampler2D u_albedo_map;
 uniform sampler2D u_metal_map;
 uniform sampler2D u_rough_map;
@@ -80,7 +81,7 @@ sMaterial getMaterialProperties() {
     mat_prop.diffuse_color = alb_color.rgb;
     mat_prop.alpha = alb_color.a;
 
-    if (u_is_conductor_material == 0) {
+    if (u_is_conductor_material != 0) {
         mat_prop.specular_color = mat_prop.diffuse_color;
     } else {
         mat_prop.specular_color = vec3(0.04);
