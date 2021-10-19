@@ -106,18 +106,18 @@ void main() {
     sVectors frag_vectors = computeVectors();
     sMaterial frag_material = getMaterialProperties();
 
-    //vec3 color = getPixelColor(frag_vectors, frag_material);
-    vec3 color;
+    vec3 color = getPixelColor(frag_vectors, frag_material);
+    //vec3 color;
     // Ouput other textures for debugging
     vec3 output_color;
-    if (u_output_mode == 0) {
+    if (u_output_mode == 0.0) {
         output_color = color;
-    } else if (u_output_mode == 1) {
+    } else if (u_output_mode == 1.0) {
         output_color = frag_material.diffuse_color;
-    } else if (u_output_mode == 2) {
-        output_color = vec3(frag_material.roughness);
-    } else if (u_output_mode == 3) {
-        output_color = vec3(frag_material.metalness);
+    } else if (u_output_mode == 2.0) {
+        output_color = vec3(frag_material.roughness, frag_material.roughness, frag_material.roughness);
+    } else if (u_output_mode == 3.0) {
+        output_color = vec3(frag_material.metalness, frag_material.metalness, frag_material.metalness);
     }
-    gl_FragColor = vec4(color, 1.0);
+    gl_FragColor = vec4(output_color, 1.0);
 }

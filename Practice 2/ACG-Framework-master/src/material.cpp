@@ -236,12 +236,11 @@ void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
 
 	// Upload PBR texteure maps
 	shader->setTexture("u_albedo_map", albedo_map);
-	shader->setTexture("u_roughness_map", roughness_map);
-	shader->setTexture("u_metalness_map", metalness_map);
+	shader->setTexture("u_rough_map", roughness_map);
+	shader->setTexture("u_metal_map", metalness_map);
 	shader->setTexture("u_brdf_LUT", brdf_LUT);
 
-	shader->setUniform("u_output_mode", render_output);
-	std::cout << render_output << std::endl;
+	shader->setUniform("u_output_mode", (float)render_output);
 }
 
 void PBRMaterial::renderInMenu() {
