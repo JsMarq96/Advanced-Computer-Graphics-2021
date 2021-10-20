@@ -10,7 +10,7 @@
           "type": "markdown",
           "state": {
             "file": "2-PBR.md",
-            "mode": "source"
+            "mode": "preview"
           }
         }
       }
@@ -89,6 +89,7 @@
   "active": "ea69d3a30f1e52e8",
   "lastOpenFiles": [
     "2-PBR.md",
+    "3-PBR IBL.md",
     "Untitled.md",
     "1-Intro a Visualizacion avanzada.md"
   ]
