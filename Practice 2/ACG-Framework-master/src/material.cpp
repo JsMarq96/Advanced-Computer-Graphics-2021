@@ -200,12 +200,10 @@ void HDReMaterial::setHDReTexture(const char* dir) {
 	curr_hdre = HDRE::Get(dir);
 
 	enviorment->cubemapFromHDRE(curr_hdre, 0);
-	std::cout << "0" << std::endl;
 
 	for (int i = 0; i < 5; i++) {
 		prem[i]->cubemapFromHDRE(curr_hdre, i + 1);
 		scene_data.enviorment_prem[i] = prem[i];
-		std::cout << i << std::endl;
 	}
 
 	scene_data.enviorment_cubemap = enviorment;

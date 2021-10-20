@@ -67,9 +67,9 @@ vec3 FresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
 sVectors computeVectors() {
     sVectors result;
     result.normal = normalize(v_normal);
-    result.view = normalize(v_world_position - u_camera_position);
-    result.light = normalize(v_world_position - u_light_position);
-    result.reflect = normalize(reflect(v_world_position, result.normal));
+    result.view = normalize(u_camera_position - v_world_position);
+    result.light = normalize(u_light_position - v_world_position);
+    result.reflect = normalize(reflect(result.light, result.view));
     result.half_v = normalize(result.view + result.light);
     result.n_dot_v = dot(result.normal, result.view);
 
@@ -84,7 +84,7 @@ sMaterial getMaterialProperties() {
     mat_prop.diffuse_color = alb_color.rgb;
     mat_prop.alpha = alb_color.a;
 
-    if (u_is_conductor_material != 0) {
+    if (u_is_conductor_material == 0) {
         mat_prop.specular_color = mat_prop.diffuse_color;
     } else {
         mat_prop.specular_color = vec3(0.04);
@@ -97,12 +97,15 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     // IBL
     vec2 LUT_brdf = texture2D(u_brdf_LUT, vec2(vects.n_dot_v, mat_props.roughness)).rg;
     vec3 fresnel = FresnelSchlickRoughness(vects.n_dot_v, mat_props.specular_color, mat_props.roughness);
-    //vec3 specular_IBL = (fresnel * (LUT_brdf.r + LUT_brdf.g)) * getReflectionColor(vects.reflect, mat_props.roughness);
-    vec3 specular_IBL = getReflectionColor(vects.reflect, mat_props.roughness);
+    vec3 specular_IBL = (fresnel * (LUT_brdf.r + LUT_brdf.g)) * getReflectionColor(vects.reflect, mat_props.roughness);
+    //vec3 specular_IBL = getReflectionColor(vects.reflect, mat_props.roughness);
 
-    vec3 diffuse_IBL = textureCube(u_texture_enviorment, vects.normal).rgb;
-    //vec3 diffuse_IBL = mat_props.diffuse_color * textureCube(u_texture_enviorment, vects.normal).rgb;
+    //vec3 diffuse_IBL = textureCube(u_texture_enviorment, vects.normal).rgb;
+    vec3 diffuse_IBL = mat_props.diffuse_color * getReflectionColor(vects.normal, mat_props.roughness);
     return diffuse_IBL;
+    //return specular_IBL;
+    //return specular_IBL + (diffuse_IBL * (1.0 - specular_IBL));
+    return specular_IBL + (diffuse_IBL);
 }
 
 void main() {
@@ -110,7 +113,7 @@ void main() {
     sMaterial frag_material = getMaterialProperties();
 
     vec3 color = getPixelColor(frag_vectors, frag_material);
-    //vec3 color;
+
     // Ouput other textures for debugging
     vec3 output_color;
     if (u_output_mode == 0.0) {
