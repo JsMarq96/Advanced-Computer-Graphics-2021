@@ -97,6 +97,8 @@ class HDReMaterial : public StandardMaterial {
 public:
 	HDRE* curr_hdre = NULL;
 	int display_level = 0;
+	Texture* enviorment = NULL;
+	Texture* prem[5] = { NULL };
 
 	HDReMaterial();
 	~HDReMaterial();
@@ -112,6 +114,8 @@ public:
 	Texture* roughness_map = NULL;
 	Texture* metalness_map = NULL;
 	Texture* brdf_LUT = NULL;
+
+	HDReMaterial* hdr_material = NULL;
 
 	int render_output = 0;
 

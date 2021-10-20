@@ -179,23 +179,45 @@ void ReflectiveMaterial::renderInMenu() {
 
 // HDRe MATERIAL
 HDReMaterial::HDReMaterial() {
-	texture = new Texture();
+	for (int i = 0; i < 5; i++) {
+		prem[i] = new Texture();
+	}
+
+	enviorment = new Texture();
 
 	shader = Shader::Get("data/shaders/basic.vs", "data/shaders/skybox.fs");
 }
 
 HDReMaterial::~HDReMaterial() {
-	delete texture;
+	for (int i = 0; i < 5; i++) {
+		delete prem[i];
+	}
+
+	delete enviorment;
 }
 
 void HDReMaterial::setHDReTexture(const char* dir) {
 	curr_hdre = HDRE::Get(dir);
-	scene_data.enviorment_HDRE = curr_hdre;
+
+	enviorment->cubemapFromHDRE(curr_hdre, 0);
+	std::cout << "0" << std::endl;
+
+	for (int i = 0; i < 5; i++) {
+		prem[i]->cubemapFromHDRE(curr_hdre, i + 1);
+		scene_data.enviorment_prem[i] = prem[i];
+		std::cout << i << std::endl;
+	}
+
+	scene_data.enviorment_cubemap = enviorment;
 }
 
 void HDReMaterial::setUniforms(Camera* camera, Matrix44 model) {
-	texture->cubemapFromHDRE(curr_hdre, display_level);
-	shader->setTexture("u_texture", texture);
+
+	if (display_level == 0) {
+		shader->setTexture("u_texture", enviorment);
+	} else {
+		shader->setTexture("u_texture", prem[display_level-1]);
+	}
 
 	StandardMaterial::setUniforms(camera, model);
 }
@@ -219,21 +241,14 @@ void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	StandardMaterial::setUniforms(camera, model);
 
 	// Upload all the textures for the IBL calculations
-	Texture* text = new Texture();
-	text->cubemapFromHDRE(scene_data.enviorment_HDRE, 0);
-	shader->setTexture("u_texture_enviorment", text);
+	shader->setTexture("u_texture_enviorment", scene_data.enviorment_cubemap);
 
 	char text_name[] = "u_texture_prem_0";
 	int text_size = strlen(text_name);
-	for (int level = 1; level < 6; level++) {
-		Texture* tex = new Texture();
-		tex->cubemapFromHDRE(scene_data.enviorment_HDRE, level);
-
-		shader->setTexture(text_name, tex);
-		delete tex;
+	for (int level = 0; level < 5; level++) {		
+		shader->setTexture(text_name, scene_data.enviorment_prem[level]);
 		text_name[text_size - 1]++;
 	}
-	delete text;
 
 	// Upload PBR texteure maps
 	shader->setTexture("u_albedo_map", albedo_map);
