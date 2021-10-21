@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "3-PBR IBL.md",
+            "file": "3-Pbr ibl preparation.md",
             "mode": "source"
           }
         }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3-PBR IBL.md",
+                "file": "3-Pbr ibl preparation.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,8 +88,10 @@
   },
   "active": "ea69d3a30f1e52e8",
   "lastOpenFiles": [
-    "Untitled.md",
+    "3-Pbr ibl preparation.md",
     "2-PBR.md",
-    "1-Intro a Visualizacion avanzada.md"
+    "3-PBR IBL.md",
+    "1-Intro a Visualizacion avanzada.md",
+    "Untitled.md"
   ]
 }
