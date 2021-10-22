@@ -204,6 +204,7 @@ void HDReMaterial::setHDReTexture(const char* dir) {
 	for (int i = 0; i < 5; i++) {
 		prem[i]->cubemapFromHDRE(curr_hdre, i + 1);
 		scene_data.enviorment_prem[i] = prem[i];
+		//scene_data.enviorment_prem[i]->cubemapFromHDRE(curr_hdre, i+1);
 	}
 
 	scene_data.enviorment_cubemap = enviorment;
@@ -222,30 +223,41 @@ void HDReMaterial::setUniforms(Camera* camera, Matrix44 model) {
 
 
 // PBR MATERIAL
-PBRMaterial::PBRMaterial(const char* albedo_dir,
-						 const char* roughness_dir,
-						 const char* metalness_dir) {
+PBRMaterial::PBRMaterial(const char*         albedo_dir,
+						 const char*         roughness_dir, 
+						 const char*         metalness_dir,
+						 const ePBR_Format   itexture_mode) {
 	albedo_map = Texture::Get(albedo_dir);
 	roughness_map = Texture::Get(roughness_dir);
 	metalness_map = Texture::Get(metalness_dir);
 	brdf_LUT = Texture::Get("data/brdfLUT.png");
 
+
 	shader = Shader::Get("data/shaders/IBL.vs", "data/shaders/IBL.fs");
+
+	texture_mode = itexture_mode;
 }
+
 PBRMaterial::~PBRMaterial() {
+	delete albedo_map;
+	delete roughness_map;
+	delete metalness_map;
+	delete brdf_LUT;
 }
 
 void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	StandardMaterial::setUniforms(camera, model);
 
+	// Light info
+	shader->setUniform("u_light_radiance", scene_data.light.color);
+	shader->setUniform("u_light_position", scene_data.light.position);
+
 	// Upload all the textures for the IBL calculations
 	shader->setTexture("u_texture_enviorment", scene_data.enviorment_cubemap);
 
-	char text_name[] = "u_texture_prem_0";
-	int text_size = strlen(text_name);
-	for (int level = 0; level < 5; level++) {		
-		shader->setTexture(text_name, scene_data.enviorment_prem[level]);
-		text_name[text_size - 1]++;
+	char* text_name[5] = { "u_texture_prem_0", "u_texture_prem_1", "u_texture_prem_2", "u_texture_prem_3", "u_texture_prem_4" };
+	for (int level = 0; level < 5; level++) {
+		shader->setTexture(text_name[level], scene_data.enviorment_prem[level]);
 	}
 
 	// Upload PBR texteure maps
@@ -255,6 +267,7 @@ void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	shader->setTexture("u_brdf_LUT", brdf_LUT);
 
 	shader->setUniform("u_output_mode", (float)render_output);
+	shader->setUniform("u_material_mode", (float)(int)texture_mode);
 }
 
 void PBRMaterial::renderInMenu() {

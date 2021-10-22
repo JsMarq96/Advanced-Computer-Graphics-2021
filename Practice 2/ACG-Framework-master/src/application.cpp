@@ -45,16 +45,14 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 
 	// Create camera
 	camera = new Camera();
-	camera->lookAt(Vector3(1.726f, 1.726f, 1.726f), Vector3(0.f, 0.0f, 0.f), Vector3(0.f, 1.f, 0.f));
+	camera->lookAt(Vector3(5.f, 5.f, 5.f), Vector3(0.f, 0.0f, 0.f), Vector3(0.f, 1.f, 0.f));
 	camera->setPerspective(45.f,window_width/(float)window_height,0.1f,10000.f); //set the projection, we want to be perspective
 
 	// Scene setup
 	{
-		SkyboxNode* skybox_node = new SkyboxNode();
-		//node_list.push_back(skybox_node);
+		HDReSkyboxNode* skybox_node = new HDReSkyboxNode();
+		node_list.push_back(skybox_node);
 
-		HDReSkyboxNode* skybox = new HDReSkyboxNode();
-		node_list.push_back(skybox);
 		// Light setup
 		scene_data.light.diffuse = Vector3{ 1.0f, 1.0f, 1.0f } * 0.5f;
 		scene_data.light.specular = Vector3{ 1.0f, 1.0f, 1.0f } * 0.6f;
@@ -62,14 +60,17 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		scene_data.light.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		scene_data.light.position = { 5.0f, 5.0f, 5.0f };
 
-		SceneNode* helmet = new SceneNode("PBR node");
-		std::cout << glGetError() << std::endl;
-		helmet->material = new PBRMaterial("data/models/helmet/albedo.png", 
-										   "data/models/helmet/roughness.png", 
-										   "data/models/helmet/metalness.png");
-		std::cout << glGetError() << std::endl;
-		helmet->mesh = Mesh::Get("data/models/bench/bench.obj.mbin");
-		node_list.push_back(helmet);
+		
+		SceneNode* ref_node = new SceneNode("Reflective node");
+
+		ref_node->mesh = Mesh::Get("data/models/helmet/helmet.obj.mbin");
+
+		ref_node->material = new PBRMaterial("data/models/helmet/albedo.png", 
+											 "data/models/helmet/roughness.png", 
+											 "data/models/helmet/metalness.png",
+											 G_ROUGH_B_METAL);
+
+		node_list.push_back(ref_node);
 	}
 	
 	//hide the cursor
@@ -124,10 +125,10 @@ void Application::update(double seconds_elapsed)
 
 	//async input to move the camera around
 	if (Input::isKeyPressed(SDL_SCANCODE_LSHIFT)) speed *= 10; //move fast er with left shift
-	//if (Input::isKeyPressed(SDL_SCANCODE_W) || Input::isKeyPressed(SDL_SCANCODE_UP)) camera->move(Vector3(0.0f, 0.0f, 1.0f) * speed);
-	//if (Input::isKeyPressed(SDL_SCANCODE_S) || Input::isKeyPressed(SDL_SCANCODE_DOWN)) camera->move(Vector3(0.0f, 0.0f,-1.0f) * speed);
-	//if (Input::isKeyPressed(SDL_SCANCODE_A) || Input::isKeyPressed(SDL_SCANCODE_LEFT)) camera->move(Vector3(1.0f, 0.0f, 0.0f) * speed);
-	//if (Input::isKeyPressed(SDL_SCANCODE_D) || Input::isKeyPressed(SDL_SCANCODE_RIGHT)) camera->move(Vector3(-1.0f, 0.0f, 0.0f) * speed);
+	if (Input::isKeyPressed(SDL_SCANCODE_W) || Input::isKeyPressed(SDL_SCANCODE_UP)) camera->move(Vector3(0.0f, 0.0f, 1.0f) * speed);
+	if (Input::isKeyPressed(SDL_SCANCODE_S) || Input::isKeyPressed(SDL_SCANCODE_DOWN)) camera->move(Vector3(0.0f, 0.0f,-1.0f) * speed);
+	if (Input::isKeyPressed(SDL_SCANCODE_A) || Input::isKeyPressed(SDL_SCANCODE_LEFT)) camera->move(Vector3(1.0f, 0.0f, 0.0f) * speed);
+	if (Input::isKeyPressed(SDL_SCANCODE_D) || Input::isKeyPressed(SDL_SCANCODE_RIGHT)) camera->move(Vector3(-1.0f, 0.0f, 0.0f) * speed);
 	if (Input::isKeyPressed(SDL_SCANCODE_SPACE)) camera->moveGlobal(Vector3(0.0f, -1.0f, 0.0f) * speed);
 	//if (Input::isKeyPressed(SDL_SCANCODE_LCTRL)) camera->moveGlobal(Vector3(0.0f,  1.0f, 0.0f) * speed);
 

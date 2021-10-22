@@ -14,7 +14,6 @@ struct sSceneData {
 	} light;
 	
 	Texture* enviorment_cubemap = NULL;
-
 	Texture* enviorment_prem[5] = { NULL };
 };
 #endif

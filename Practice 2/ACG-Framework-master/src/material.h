@@ -108,6 +108,11 @@ public:
 };
 
 
+enum ePBR_Format : int {
+	SEPARETE_TEXTURES = 0,
+	G_ROUGH_B_METAL = 1
+};
+
 class PBRMaterial : public StandardMaterial {
 public:
 	Texture* albedo_map = NULL;
@@ -119,9 +124,13 @@ public:
 
 	int render_output = 0;
 
-	PBRMaterial(const char*   albedo_dir, 
-				const char*   roughness_dir, 
-				const char*   metalness_dir);
+	ePBR_Format texture_mode = SEPARETE_TEXTURES;
+
+	PBRMaterial(const char*         albedo_dir, 
+				const char*         roughness_dir, 
+				const char*         metalness_dir,
+				const ePBR_Format   texture_mode);
+
 	~PBRMaterial();
 
 	void setUniforms(Camera* camera, Matrix44 model);
