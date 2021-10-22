@@ -64,8 +64,8 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 
 		PBRMaterial* pbr_mat = new PBRMaterial("data/models/helmet/albedo.png", "data/models/helmet/roughness.png", "data/models/helmet/metalness.png");
 		SceneNode* helmet = new SceneNode("PBR node");
-		helmet->mesh = Mesh::Get("data/models/helmet/helmet.obj.mbin");
 		helmet->material = pbr_mat;
+		helmet->mesh = Mesh::Get("data/models/helmet/helmet.obj.mbin");
 		node_list.push_back(helmet);
 	}
 	
