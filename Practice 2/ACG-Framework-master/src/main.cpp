@@ -17,7 +17,6 @@
 #include "application.h"
 #include "extra/directory_watcher.h"
 
-#include "scene_data.h"
 
 extern sSceneData scene_data;
 

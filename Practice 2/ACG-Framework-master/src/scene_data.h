@@ -15,6 +15,6 @@ struct sSceneData {
 	
 	Texture* enviorment_cubemap = NULL;
 
-	HDRE* enviorment_HDRE = NULL;
+	Texture* enviorment_prem[5] = { NULL };
 };
 #endif
