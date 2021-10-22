@@ -62,10 +62,13 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		scene_data.light.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		scene_data.light.position = { 5.0f, 5.0f, 5.0f };
 
-		PBRMaterial* pbr_mat = new PBRMaterial("data/models/helmet/albedo.png", "data/models/helmet/roughness.png", "data/models/helmet/metalness.png");
 		SceneNode* helmet = new SceneNode("PBR node");
-		helmet->material = pbr_mat;
-		helmet->mesh = Mesh::Get("data/models/helmet/helmet.obj.mbin");
+		std::cout << glGetError() << std::endl;
+		helmet->material = new PBRMaterial("data/models/helmet/albedo.png", 
+										   "data/models/helmet/roughness.png", 
+										   "data/models/helmet/metalness.png");
+		std::cout << glGetError() << std::endl;
+		helmet->mesh = Mesh::Get("data/models/bench/bench.obj.mbin");
 		node_list.push_back(helmet);
 	}
 	

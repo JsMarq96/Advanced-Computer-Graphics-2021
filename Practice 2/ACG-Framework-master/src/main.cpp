@@ -44,8 +44,8 @@ SDL_Window* createWindow(const char* caption, int width, int height, bool fullsc
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 4);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
 	//antialiasing (disable this lines if it goes too slow)
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
@@ -77,7 +77,7 @@ SDL_Window* createWindow(const char* caption, int width, int height, bool fullsc
 	#ifdef USE_GLEW
 		glewInit();
 	#endif
-
+		std::cout << glGetError() << std::endl;
 	int window_width, window_height;
 	SDL_GetWindowSize(sdl_window, &window_width, &window_height);
 	std::cout << " * Window size: " << window_width << " x " << window_height << std::endl;
