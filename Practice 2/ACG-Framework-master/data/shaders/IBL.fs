@@ -19,8 +19,6 @@ uniform samplerCube u_texture_prem_2;
 uniform samplerCube u_texture_prem_3; 
 uniform samplerCube u_texture_prem_4; 
 
-uniform int u_is_conductor_material;
-
 uniform float u_output_mode;
 // TODO: add the other maps
 
@@ -84,11 +82,8 @@ sMaterial getMaterialProperties() {
     mat_prop.diffuse_color = alb_color.rgb;
     mat_prop.alpha = alb_color.a;
 
-    if (u_is_conductor_material != 0) {
-        mat_prop.specular_color = mat_prop.diffuse_color;
-    } else {
-        mat_prop.specular_color = vec3(0.04);
-    }
+    mat_prop.specular_color = mix(vec3(0.04), mat_prop.diffuse_color, mat_prop.metalness);
+    mat_prop.diffuse_color = mix(mat_prop.diffuse_color, vec3(0.0), mat_prop.metalness);
 
     return mat_prop;
 }
@@ -98,10 +93,13 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     vec2 LUT_brdf = texture2D(u_brdf_LUT, vec2(vects.n_dot_v, mat_props.roughness)).rg;
     vec3 fresnel = FresnelSchlickRoughness(vects.n_dot_v, mat_props.specular_color, mat_props.roughness);
     vec3 specular_IBL = ((fresnel * LUT_brdf.r) + LUT_brdf.g) * getReflectionColor(vects.reflect, mat_props.roughness);
+
+    //return ((fresnel * LUT_brdf.x) + LUT_brdf.y);
     //vec3 specular_IBL = getReflectionColor(vects.reflect, mat_props.roughness);
 
     //vec3 diffuse_IBL = textureCube(u_texture_enviorment, vects.normal).rgb;
     vec3 diffuse_IBL = mat_props.diffuse_color * getReflectionColor(vects.normal, mat_props.roughness);
+    //return getReflectionColor(vects.normal, mat_props.roughness);
     //return diffuse_IBL;
     //return specular_IBL;
     return specular_IBL + (diffuse_IBL * (1.0 - specular_IBL));
