@@ -100,9 +100,9 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     //vec3 diffuse_IBL = textureCube(u_texture_enviorment, vects.normal).rgb;
     vec3 diffuse_IBL = mat_props.diffuse_color * getReflectionColor(vects.normal, mat_props.roughness);
     //return getReflectionColor(vects.normal, mat_props.roughness);
-    //return diffuse_IBL;
+    return diffuse_IBL;
     //return specular_IBL;
-    return specular_IBL + (diffuse_IBL * (1.0 - specular_IBL));
+    //return specular_IBL + (diffuse_IBL * (1.0 - specular_IBL));
     return specular_IBL + (diffuse_IBL);
 }
 
