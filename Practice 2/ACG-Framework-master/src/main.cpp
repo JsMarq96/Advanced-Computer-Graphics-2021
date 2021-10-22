@@ -33,8 +33,8 @@ CDirectoryWatcher dir_watcher_data;
 //create a window using SDL
 SDL_Window* createWindow(const char* caption, int width, int height, bool fullscreen = false)
 {
-    int multisample = 8;
-    bool retina = true; //change this to use a retina display
+    int multisample = 4;
+    bool retina = false; //change this to use a retina display
 
 	//set attributes
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -44,9 +44,9 @@ SDL_Window* createWindow(const char* caption, int width, int height, bool fullsc
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 
-	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
-	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
 	//antialiasing (disable this lines if it goes too slow)
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
