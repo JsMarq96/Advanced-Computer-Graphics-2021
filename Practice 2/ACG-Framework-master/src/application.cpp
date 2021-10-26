@@ -75,6 +75,7 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		SceneNode* craft_node = new SceneNode("Crafting node");
 		//text_node->mesh = Mesh::Get("data/models/crafting_table/box.obj");
 		craft_node->mesh = Mesh::Get("data/meshes/box.ASE");
+		craft_node->model.setTranslation(0.0f, 0.0f, 7.0f);
 		craft_node->model.scale(0.025f, 0.025f, 0.025f);
 		craft_node->material = new PBRMaterial("data/models/crafting_table/crafting_table_side.png",
 											  "data/models/crafting_table/crafting_table_side_s.png",

@@ -202,7 +202,7 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     vec3 direct_light_result = BRDF * radiance * vects.l_dot_n;
 
     // IBL
-    vec2 LUT_brdf = texture2D(u_brdf_LUT, vec2(vects.n_dot_v, mat_props.roughness)).rg;
+    vec2 LUT_brdf = texture2D(u_brdf_LUT, vec2(vects.n_dot_v+ 0.0001, mat_props.roughness + 0.0001)).rg;
 
     vec3 fresnel_IBL = FresnelSchlickRoughness(vects.n_dot_v, mat_props.specular_color, mat_props.roughness);
 
@@ -210,7 +210,7 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
 
     vec3 specular_IBL = ((fresnel_IBL * LUT_brdf.x) + LUT_brdf.y) * specular_sample;
     
-    vec3 diffuse_IBL = mat_props.diffuse_color * getReflectionColor(vects.normal, mat_props.roughness);
+    vec3 diffuse_IBL = mat_props.diffuse_color;// * getReflectionColor(vects.normal, mat_props.roughness);
 
     diffuse_IBL = diffuse_IBL * (1.0 - fresnel_IBL);
     //diffuse_IBL = diffuse_IBL * (1.0 - specular_IBL);
