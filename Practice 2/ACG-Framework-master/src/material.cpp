@@ -243,6 +243,7 @@ PBRMaterial::PBRMaterial(const char* albedo_dir,
 						 const char* normal_dir) {
 	albedo_map = Texture::Get(albedo_dir);
 	roughness_map = Texture::Get(roughness_dir);
+	normal_map = Texture::Get(normal_dir);
 	brdf_LUT = Texture::Get("data/brdfLUT.png");
 
 
@@ -254,6 +255,7 @@ PBRMaterial::PBRMaterial(const char* albedo_dir,
 PBRMaterial::~PBRMaterial() {
 	delete albedo_map;
 	delete roughness_map;
+	delete normal_map;
 	delete metalness_map;
 	delete brdf_LUT;
 }
@@ -277,12 +279,24 @@ void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	if (albedo_map) shader->setTexture("u_albedo_map", albedo_map);
 	if (roughness_map) shader->setTexture("u_rough_map", roughness_map);
 	if (metalness_map) shader->setTexture("u_metal_map", metalness_map);
+	if (normal_map) shader->setTexture("u_normal_map", normal_map);
 	shader->setTexture("u_brdf_LUT", brdf_LUT);
 
 	shader->setUniform("u_output_mode", (float)render_output);
 	shader->setUniform("u_material_mode", (float)(int)texture_mode);
+
+	// POM parameters
+	shader->setUniform("u_POM_enable", (enable_POM) ? 1.0f : 0.0f);
+	shader->setUniform("u_POM_resolution", (float) POM_resulution);
+	shader->setUniform("u_POM_depth", POM_depth);
 }
 
 void PBRMaterial::renderInMenu() {
 	ImGui::Combo("Render output:", (int*)&render_output, "Color\0Diffuse\0Roughness\0Metalness\0");
+	ImGui::Checkbox("Enable POM", &enable_POM);
+	
+	if (enable_POM) {
+		ImGui::SliderInt("POM resolution", &POM_resulution, 1, 200);
+		ImGui::SliderFloat("POM depth", &POM_depth, 0.005f, 1.0f);
+	}
 }

@@ -119,6 +119,7 @@ public:
 	Texture* albedo_map = NULL;
 	Texture* roughness_map = NULL;
 	Texture* metalness_map = NULL;
+	Texture* normal_map = NULL;
 	Texture* brdf_LUT = NULL;
 
 	HDReMaterial* hdr_material = NULL;
@@ -126,6 +127,10 @@ public:
 	int render_output = 0;
 
 	ePBR_Format texture_mode = SEPARETE_TEXTURES;
+
+	bool enable_POM = false;
+	int POM_resulution = 32;
+	float POM_depth = 0.2f;
 
 	PBRMaterial(const char*         albedo_dir, 
 				const char*         roughness_dir, 

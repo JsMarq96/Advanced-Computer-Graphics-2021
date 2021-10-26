@@ -10,6 +10,7 @@ uniform vec3 u_camera_position;
 uniform sampler2D u_albedo_map;
 uniform sampler2D u_metal_map;
 uniform sampler2D u_rough_map;
+uniform sampler2D u_normal_map;
 uniform sampler2D u_brdf_LUT;
 
 // HDRE textures
@@ -22,7 +23,11 @@ uniform samplerCube u_texture_prem_4;
 
 uniform float u_output_mode;
 uniform float u_material_mode;
-// TODO: add the other maps
+
+// POM uniforms
+uniform float u_POM_enable;
+uniform float u_POM_resolution;
+uniform float u_POM_depth;
 
 #define PI 3.14159265359
 #define RECIPROCAL_PI 0.3183098861837697
@@ -89,6 +94,24 @@ vec3 linear_to_gamma(vec3 color)
 	return pow(color, vec3(INV_GAMMA));
 }
 
+mat3 cotangent_frame(vec3 N, vec3 p, vec2 uv){
+	// get edge vectors of the pixel triangle
+	vec3 dp1 = dFdx( p );
+	vec3 dp2 = dFdy( p );
+	vec2 duv1 = dFdx( uv );
+	vec2 duv2 = dFdy( uv );
+
+	// solve the linear system
+	vec3 dp2perp = cross( dp2, N );
+	vec3 dp1perp = cross( N, dp1 );
+	vec3 T = dp2perp * duv1.x + dp1perp * duv2.x;
+	vec3 B = dp2perp * duv1.y + dp1perp * duv2.y;
+
+	// construct a scale-invariant frame
+	float invmax = inversesqrt( max( dot(T,T), dot(B,B) ) );
+	return mat3( T * invmax, B * invmax, N );
+}
+
 // CUSTOM FUNCTIONS ===============
 sVectors computeVectors() {
     sVectors result;
@@ -104,11 +127,11 @@ sVectors computeVectors() {
     return result;
 }
 
-sMaterial getMaterialProperties_v1() {
+sMaterial getMaterialProperties_v1(vec2 uv) {
     sMaterial mat_prop;
-    mat_prop.roughness = texture2D(u_rough_map, v_uv).r;
-    mat_prop.metalness = texture2D(u_metal_map, v_uv).r;
-    vec4 alb_color = texture2D(u_albedo_map, v_uv);
+    mat_prop.roughness = texture2D(u_rough_map, uv).r;
+    mat_prop.metalness = texture2D(u_metal_map, uv).r;
+    vec4 alb_color = texture2D(u_albedo_map, uv);
     mat_prop.base_color = alb_color.rgb;
     mat_prop.diffuse_color = alb_color.rgb;
     mat_prop.alpha = alb_color.a;
@@ -121,11 +144,11 @@ sMaterial getMaterialProperties_v1() {
     return mat_prop;
 }
 
-sMaterial getMaterialProperties_v2() {
+sMaterial getMaterialProperties_v2(vec2 uv) {
     sMaterial mat_prop;
-    mat_prop.roughness = texture2D(u_rough_map, v_uv).g;
-    mat_prop.metalness = texture2D(u_rough_map, v_uv).b;
-    vec4 alb_color = texture2D(u_albedo_map, v_uv);
+    mat_prop.roughness = texture2D(u_rough_map, uv).g;
+    mat_prop.metalness = texture2D(u_rough_map, uv).b;
+    vec4 alb_color = texture2D(u_albedo_map, uv);
     mat_prop.base_color = alb_color.rgb;
     mat_prop.diffuse_color = alb_color.rgb;
     mat_prop.alpha = alb_color.a;
@@ -138,13 +161,13 @@ sMaterial getMaterialProperties_v2() {
     return mat_prop;
 }
 
-sMaterial getMaterialProperties_v3() {
+sMaterial getMaterialProperties_v3(vec2 uv) {
     // Minecraft OldPBR format
     sMaterial mat_prop;
-    mat_prop.roughness = 1.0 - texture2D(u_rough_map, v_uv).r;
-    mat_prop.metalness = texture2D(u_rough_map, v_uv).g;
+    mat_prop.roughness = 1.0 - texture2D(u_rough_map, uv).r;
+    mat_prop.metalness = texture2D(u_rough_map, uv).g;
     // mat_prop.emisiveness = texture2D(u_rough_map, v_uv).b;
-    vec4 alb_color = texture2D(u_albedo_map, v_uv);
+    vec4 alb_color = texture2D(u_albedo_map, uv);
     mat_prop.base_color = alb_color.rgb;
     mat_prop.diffuse_color = alb_color.rgb;
     mat_prop.alpha = alb_color.a;
@@ -210,7 +233,8 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
 
     vec3 specular_IBL = ((fresnel_IBL * LUT_brdf.x) + LUT_brdf.y) * specular_sample;
     
-    vec3 diffuse_IBL = mat_props.diffuse_color;// * getReflectionColor(vects.normal, mat_props.roughness);
+    vec3 diffuse_IBL = mat_props.diffuse_color;
+    //vec3 diffuse_IBL = mat_props.diffuse_color * getReflectionColor(vects.normal, mat_props.roughness * 9.0);
 
     diffuse_IBL = diffuse_IBL * (1.0 - fresnel_IBL);
     //diffuse_IBL = diffuse_IBL * (1.0 - specular_IBL);
@@ -226,16 +250,52 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     return direct_light_result + IBL_light_result;
 }
 
+// POM
+float get_height(vec2 uv_coords) {
+    return 1.0 - (texture2D(u_normal_map, uv_coords).a * 2.0 - 1.0);
+}
+
+vec2 get_POM_coords(vec2 base_coords, vec3 view_vector) {
+    float map_depth = get_height(base_coords);
+    float layer_depth = 0.0;
+    float layer_step = 1.0 / u_POM_resolution;
+    vec2 it_coords = base_coords;
+    vec2 prev_coords = vec2(0);
+    vec2 step_vector = ((-view_vector.xy) / view_vector.z * u_POM_depth) / u_POM_resolution ;
+
+    // Early stop
+    if (map_depth == 0.0) {
+        return it_coords;
+    }
+
+    for(; layer_depth < 1.0 && map_depth > layer_depth; layer_depth += layer_step) {
+        prev_coords = it_coords;
+        it_coords -= step_vector;
+        map_depth = get_height(it_coords);
+    }
+
+    return prev_coords;
+}
+
+
 void main() {
     sVectors frag_vectors = computeVectors();
     sMaterial frag_material;
+    vec2 frag_coords;
+
+    if (u_POM_enable == 1.0) {
+        mat3 TBN = transpose(cotangent_frame(frag_vectors.normal, frag_vectors.view, v_uv));
+        frag_coords = get_POM_coords(v_uv, (TBN * frag_vectors.view));
+    } else {
+        frag_coords = v_uv;
+    }
 
     if (u_material_mode == 0.0) {
-        frag_material = getMaterialProperties_v1();
+        frag_material = getMaterialProperties_v1(frag_coords);
     } else if (u_material_mode == 1.0) {
-        frag_material = getMaterialProperties_v2();
+        frag_material = getMaterialProperties_v2(frag_coords);
     } else if (u_material_mode == 2.0) {
-        frag_material = getMaterialProperties_v3();
+        frag_material = getMaterialProperties_v3(frag_coords);
     }
 
     frag_material = degamma(frag_material);

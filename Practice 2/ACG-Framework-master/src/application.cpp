@@ -72,14 +72,25 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 
 		node_list.push_back(ref_node);
 
-		SceneNode* craft_node = new SceneNode("Crafting node");
-		//text_node->mesh = Mesh::Get("data/models/crafting_table/box.obj");
+		SceneNode* diamont_node = new SceneNode("Diamond node");
+		diamont_node->mesh = Mesh::Get("data/meshes/box.ASE");
+		diamont_node->model.setTranslation(5.0f, 0.0f, 0.0f);
+		diamont_node->model.scale(0.025f, 0.025f, 0.025f);
+		diamont_node->material = new PBRMaterial("data/models/crafting_table/1.png",
+												"data/models/crafting_table/1_s.png",
+												"data/models/crafting_table/1_n.png");
+		((PBRMaterial*)diamont_node->material)->enable_POM = true;
+		node_list.push_back(diamont_node);
+
+		SceneNode* craft_node = new SceneNode("Craft node");
 		craft_node->mesh = Mesh::Get("data/meshes/box.ASE");
-		craft_node->model.setTranslation(0.0f, 0.0f, 7.0f);
+		craft_node->model.setTranslation(-5.0f, 0.0f, 0.0f);
 		craft_node->model.scale(0.025f, 0.025f, 0.025f);
 		craft_node->material = new PBRMaterial("data/models/crafting_table/crafting_table_side.png",
-											  "data/models/crafting_table/crafting_table_side_s.png",
-											  "");
+												"data/models/crafting_table/crafting_table_side_s.png",
+												"data/models/crafting_table/crafting_table_side_n.png");
+		((PBRMaterial*)craft_node->material)->enable_POM = true;
+		((PBRMaterial*)craft_node->material)->POM_depth = 0.075f;
 		node_list.push_back(craft_node);
 	}
 	
