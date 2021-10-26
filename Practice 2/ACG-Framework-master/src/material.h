@@ -110,7 +110,8 @@ public:
 
 enum ePBR_Format : int {
 	SEPARETE_TEXTURES = 0,
-	G_ROUGH_B_METAL = 1
+	G_ROUGH_B_METAL = 1,
+	MINECRAFT_PBR = 2
 };
 
 class PBRMaterial : public StandardMaterial {
@@ -130,6 +131,10 @@ public:
 				const char*         roughness_dir, 
 				const char*         metalness_dir,
 				const ePBR_Format   texture_mode);
+
+	PBRMaterial(const char* albedo_dir,
+		const char* roughness_dir,
+		const char* normal_dir);
 
 	~PBRMaterial();
 

@@ -238,6 +238,19 @@ PBRMaterial::PBRMaterial(const char*         albedo_dir,
 	texture_mode = itexture_mode;
 }
 
+PBRMaterial::PBRMaterial(const char* albedo_dir,
+						 const char* roughness_dir, 
+						 const char* normal_dir) {
+	albedo_map = Texture::Get(albedo_dir);
+	roughness_map = Texture::Get(roughness_dir);
+	brdf_LUT = Texture::Get("data/brdfLUT.png");
+
+
+	shader = Shader::Get("data/shaders/IBL.vs", "data/shaders/IBL.fs");
+
+	texture_mode = MINECRAFT_PBR;
+}
+
 PBRMaterial::~PBRMaterial() {
 	delete albedo_map;
 	delete roughness_map;
@@ -261,9 +274,9 @@ void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	}
 
 	// Upload PBR texteure maps
-	shader->setTexture("u_albedo_map", albedo_map);
-	shader->setTexture("u_rough_map", roughness_map);
-	shader->setTexture("u_metal_map", metalness_map);
+	if (albedo_map) shader->setTexture("u_albedo_map", albedo_map);
+	if (roughness_map) shader->setTexture("u_rough_map", roughness_map);
+	if (metalness_map) shader->setTexture("u_metal_map", metalness_map);
 	shader->setTexture("u_brdf_LUT", brdf_LUT);
 
 	shader->setUniform("u_output_mode", (float)render_output);

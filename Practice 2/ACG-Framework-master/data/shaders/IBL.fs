@@ -93,13 +93,13 @@ vec3 linear_to_gamma(vec3 color)
 sVectors computeVectors() {
     sVectors result;
     result.normal = normalize(v_normal);
-    result.view = normalize(v_world_position - u_camera_position);
+    result.view = normalize(u_camera_position - v_world_position);
     result.light = normalize(u_light_position - v_world_position);
     result.half_v = normalize(result.view + result.light);
-    result.reflect = normalize(reflect(result.view, result.normal));
-    result.n_dot_v = max(dot(result.normal, result.view), 0.0);
-    result.n_dot_h = max(dot(result.normal, result.half_v), 0.0);
-    result.l_dot_n = max(dot(result.normal, result.light), 0.0) ;
+    result.reflect = normalize(reflect(-result.view, result.normal));
+    result.n_dot_v = max(dot(result.normal, result.view), 0.001);
+    result.n_dot_h = max(dot(result.normal, result.half_v), 0.0001);
+    result.l_dot_n = max(dot(result.normal, result.light), 0.0001);
 
     return result;
 }
@@ -112,6 +112,8 @@ sMaterial getMaterialProperties_v1() {
     mat_prop.base_color = alb_color.rgb;
     mat_prop.diffuse_color = alb_color.rgb;
     mat_prop.alpha = alb_color.a;
+
+    mat_prop.diffuse_color = gamma_to_linear(mat_prop.diffuse_color);
 
     mat_prop.specular_color = mix(vec3(0.04), mat_prop.diffuse_color, mat_prop.metalness);
     mat_prop.diffuse_color = mix(mat_prop.diffuse_color, vec3(0.0), mat_prop.metalness);
@@ -128,6 +130,27 @@ sMaterial getMaterialProperties_v2() {
     mat_prop.diffuse_color = alb_color.rgb;
     mat_prop.alpha = alb_color.a;
 
+    mat_prop.diffuse_color = gamma_to_linear(mat_prop.diffuse_color);
+
+    mat_prop.specular_color = mix(vec3(0.04), mat_prop.diffuse_color, mat_prop.metalness);
+    mat_prop.diffuse_color = mix(mat_prop.diffuse_color, vec3(0.0), mat_prop.metalness);
+
+    return mat_prop;
+}
+
+sMaterial getMaterialProperties_v3() {
+    // Minecraft OldPBR format
+    sMaterial mat_prop;
+    mat_prop.roughness = 1.0 - texture2D(u_rough_map, v_uv).r;
+    mat_prop.metalness = texture2D(u_rough_map, v_uv).g;
+    // mat_prop.emisiveness = texture2D(u_rough_map, v_uv).b;
+    vec4 alb_color = texture2D(u_albedo_map, v_uv);
+    mat_prop.base_color = alb_color.rgb;
+    mat_prop.diffuse_color = alb_color.rgb;
+    mat_prop.alpha = alb_color.a;
+
+    mat_prop.diffuse_color = gamma_to_linear(mat_prop.diffuse_color);
+
     mat_prop.specular_color = mix(vec3(0.04), mat_prop.diffuse_color, mat_prop.metalness);
     mat_prop.diffuse_color = mix(mat_prop.diffuse_color, vec3(0.0), mat_prop.metalness);
 
@@ -135,8 +158,8 @@ sMaterial getMaterialProperties_v2() {
 }
 
 sMaterial degamma(sMaterial mat) {
-    mat.diffuse_color = gamma_to_linear(mat.diffuse_color);
-    mat.specular_color = gamma_to_linear(mat.specular_color);
+    //mat.diffuse_color = gamma_to_linear(mat.diffuse_color);
+    //mat.specular_color = gamma_to_linear(mat.specular_color);
 
     return mat;
 }
@@ -153,7 +176,7 @@ float normal_Distribution_function(sVectors vects, sMaterial mat_props) {
 
 float Geometry_atenuation_term(sVectors vects, sMaterial mat_props) {
     // Using Epic's aproximation
-    float r = mat_props.roughness + 1.0;
+    float r = 1.0 + 1.0;
     float k = (r * r) / 8.0;
     float G1 = vects.n_dot_v / (vects.n_dot_v * (1.0 - k) + k);
     float G2 = vects.l_dot_n / (vects.l_dot_n * (1.0 - k) + k);
@@ -166,9 +189,9 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     vec3 diffuse_contribution = mat_props.diffuse_color;
 
     // BRDF Specular: Cook-Torrance
-    //vec3 fresnel = FresnelSchlickRoughness(vects.n_dot_v, vec3(1.0), mat_props.roughness);
-    vec3 fresnel = fresnelSchlick(vects.n_dot_h, mat_props.specular_color);
-    float normalization_factor = 4.0 * vects.n_dot_v * vects.l_dot_n + 0.0001;
+    vec3 fresnel = FresnelSchlickRoughness(vects.n_dot_v, mat_props.specular_color, mat_props.roughness);
+    //vec3 fresnel = fresnelSchlick(vects.n_dot_h, mat_props.specular_color);
+    float normalization_factor = (4.0 * vects.n_dot_v * vects.l_dot_n) + 0.0001;
     
     vec3 specular_contribution = (fresnel * Geometry_atenuation_term(vects, mat_props) * normal_Distribution_function(vects, mat_props)) / normalization_factor;
 
@@ -176,16 +199,10 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
 
     vec3 radiance = u_light_radiance.rgb;
 
-    //return fresnel;
-    //return vec3(1.0) * normal_Distribution_function(vects, mat_props); //Geometry_atenuation_term(vects, mat_props);
-    return BRDF * vects.l_dot_n;
-    //return diffuse_contribution * vects.l_dot_n;
-    //return fresnel * Geometry_atenuation_term(vects, mat_props);
-    //return specular_contribution;
-    return BRDF * radiance * vects.l_dot_n;
+    vec3 direct_light_result = BRDF * radiance * vects.l_dot_n;
 
     // IBL
-    /*vec2 LUT_brdf = texture2D(u_brdf_LUT, vec2(vects.n_dot_v, mat_props.roughness)).rg;
+    vec2 LUT_brdf = texture2D(u_brdf_LUT, vec2(vects.n_dot_v, mat_props.roughness)).rg;
 
     vec3 fresnel_IBL = FresnelSchlickRoughness(vects.n_dot_v, mat_props.specular_color, mat_props.roughness);
 
@@ -194,9 +211,19 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     vec3 specular_IBL = ((fresnel_IBL * LUT_brdf.x) + LUT_brdf.y) * specular_sample;
     
     vec3 diffuse_IBL = mat_props.diffuse_color * getReflectionColor(vects.normal, mat_props.roughness);
+
+    diffuse_IBL = diffuse_IBL * (1.0 - fresnel_IBL);
+    //diffuse_IBL = diffuse_IBL * (1.0 - specular_IBL);
     //return diffuse_IBL;
 
-    return specular_IBL + (diffuse_IBL);*/
+    vec3 IBL_light_result = specular_IBL + (diffuse_IBL);
+
+    //return specular_IBL;
+    //return vec3(LUT_brdf, 0.0);
+    //return fresnel_IBL;
+    //return IBL_light_result;
+    //return direct_light_result;
+    return direct_light_result + IBL_light_result;
 }
 
 void main() {
@@ -205,8 +232,10 @@ void main() {
 
     if (u_material_mode == 0.0) {
         frag_material = getMaterialProperties_v1();
-    } else  {
+    } else if (u_material_mode == 1.0) {
         frag_material = getMaterialProperties_v2();
+    } else if (u_material_mode == 2.0) {
+        frag_material = getMaterialProperties_v3();
     }
 
     frag_material = degamma(frag_material);

@@ -61,7 +61,7 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		scene_data.light.position = { 0.0f, 25.0f, 2.0f };
 
 		
-		SceneNode* ref_node = new SceneNode("Reflective node");
+		SceneNode* ref_node = new SceneNode("Helmet node");
 
 		ref_node->mesh = Mesh::Get("data/models/helmet/helmet.obj.mbin");
 
@@ -71,6 +71,15 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 											 G_ROUGH_B_METAL);
 
 		node_list.push_back(ref_node);
+
+		SceneNode* craft_node = new SceneNode("Crafting node");
+		//text_node->mesh = Mesh::Get("data/models/crafting_table/box.obj");
+		craft_node->mesh = Mesh::Get("data/meshes/box.ASE");
+		craft_node->model.scale(0.025f, 0.025f, 0.025f);
+		craft_node->material = new PBRMaterial("data/models/crafting_table/crafting_table_side.png",
+											  "data/models/crafting_table/crafting_table_side_s.png",
+											  "");
+		node_list.push_back(craft_node);
 	}
 	
 	//hide the cursor
