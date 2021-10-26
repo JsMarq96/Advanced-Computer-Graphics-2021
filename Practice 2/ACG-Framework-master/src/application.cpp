@@ -62,9 +62,7 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 
 		
 		SceneNode* ref_node = new SceneNode("Helmet node");
-
 		ref_node->mesh = Mesh::Get("data/models/helmet/helmet.obj.mbin");
-
 		ref_node->material = new PBRMaterial("data/models/helmet/albedo.png", 
 											 "data/models/helmet/roughness.png", 
 											 "data/models/helmet/metalness.png",
