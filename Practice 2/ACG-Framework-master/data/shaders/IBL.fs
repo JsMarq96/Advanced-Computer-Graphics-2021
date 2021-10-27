@@ -2,6 +2,7 @@ varying vec3 v_world_position;
 varying vec3 v_normal;
 varying vec2 v_uv;
 
+// Light & Scene uniforms
 uniform vec4 u_light_radiance;
 uniform vec3 u_light_position;
 uniform vec3 u_camera_position;
@@ -12,6 +13,7 @@ uniform sampler2D u_metal_map;
 uniform sampler2D u_rough_map;
 uniform sampler2D u_normal_map;
 uniform sampler2D u_height_map;
+
 uniform sampler2D u_brdf_LUT;
 
 // HDRE textures
@@ -42,6 +44,7 @@ struct sVectors {
     vec3 light;
     vec3 reflect;
     vec3 half_v;
+    vec3 tangent_view;
     float n_dot_v;
     float n_dot_h;
     float l_dot_n;
@@ -51,9 +54,10 @@ struct sMaterial {
     float roughness;
     float metalness;
     vec3 diffuse_color;
-    vec3 base_color;
     float alpha;
     vec3 specular_color;
+
+    vec3 base_color;
 };
 
 // PROVIDED FUNCTIONS ===============
@@ -76,11 +80,6 @@ vec3 getReflectionColor(vec3 r, float roughness)
 vec3 FresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
 {
     return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(clamp(1.0 - cosTheta, 0.0, 1.0), 5.0);
-}
-
-vec3 fresnelSchlick(float cosTheta, vec3 F0)
-{
-    return F0 + (1.0 - F0) * pow(clamp(1.0 - cosTheta, 0.0, 1.0), 5.0);
 }
 
 // degamma
@@ -121,23 +120,31 @@ sVectors computeVectors() {
     result.light = normalize(u_light_position - v_world_position);
     result.half_v = normalize(result.view + result.light);
     result.reflect = normalize(reflect(-result.view, result.normal));
+
+    // Clamped dots
     result.n_dot_v = clamp(dot(result.normal, result.view), 0.001, 1.0);
     result.n_dot_h = clamp(dot(result.normal, result.half_v), 0.001, 1.0);
     result.l_dot_n = clamp(dot(result.normal, result.light), 0.001, 1.0);
 
+    // From world to tangent space
+    mat3 inv_TBN = transpose(cotangent_frame(result.normal, result.view, v_uv));
+    result.tangent_view = TBN * result.view;
+
     return result;
 }
 
+// MATERIAL PROPERTIES ===============
 sMaterial getMaterialProperties_v1(vec2 uv) {
     sMaterial mat_prop;
     mat_prop.roughness = texture2D(u_rough_map, uv).r;
     mat_prop.metalness = texture2D(u_metal_map, uv).r;
-    vec4 alb_color = texture2D(u_albedo_map, uv);
-    mat_prop.base_color = alb_color.rgb;
-    mat_prop.diffuse_color = alb_color.rgb;
-    mat_prop.alpha = alb_color.a;
 
-    mat_prop.diffuse_color = gamma_to_linear(mat_prop.diffuse_color);
+    vec4 alb_color = texture2D(u_albedo_map, uv);
+
+    // Gamma to linear
+    mat_prop.base_color = gamma_to_linear(alb_color.rgb);
+    mat_prop.diffuse_color = mat_prop.base_color;
+    mat_prop.alpha = alb_color.a;
 
     // Clamping the values for avoid stinky division/multiplication by 0
     mat_prop.roughness = clamp(mat_prop.roughness, 0.01, 1.0);
@@ -153,16 +160,17 @@ sMaterial getMaterialProperties_v2(vec2 uv) {
     sMaterial mat_prop;
     mat_prop.roughness = texture2D(u_rough_map, uv).g;
     mat_prop.metalness = texture2D(u_rough_map, uv).b;
+
     vec4 alb_color = texture2D(u_albedo_map, uv);
-    mat_prop.base_color = alb_color.rgb;
-    mat_prop.diffuse_color = alb_color.rgb;
+
+    // Gamma to linear
+    mat_prop.base_color = gamma_to_linear(alb_color.rgb);
+    mat_prop.diffuse_color = mat_prop.base_color;
     mat_prop.alpha = alb_color.a;
 
     // Clamping the values for avoid stinky division/multiplication by 0
     mat_prop.roughness = clamp(mat_prop.roughness, 0.01, 1.0);
     mat_prop.metalness = clamp(mat_prop.metalness, 0.01, 1.0);
-
-    mat_prop.diffuse_color = gamma_to_linear(mat_prop.diffuse_color);
 
     mat_prop.specular_color = mix(vec3(0.04), mat_prop.diffuse_color, mat_prop.metalness);
     mat_prop.diffuse_color = mix(mat_prop.diffuse_color, vec3(0.0), mat_prop.metalness);
@@ -173,19 +181,21 @@ sMaterial getMaterialProperties_v2(vec2 uv) {
 sMaterial getMaterialProperties_v3(vec2 uv) {
     // Minecraft OldPBR format
     sMaterial mat_prop;
+    // Convert the smoothness to roughness
     mat_prop.roughness = 1.0 - texture2D(u_rough_map, uv).r;
     mat_prop.metalness = texture2D(u_rough_map, uv).g;
     // mat_prop.emisiveness = texture2D(u_rough_map, v_uv).b;
+
     vec4 alb_color = texture2D(u_albedo_map, uv);
-    mat_prop.base_color = alb_color.rgb;
-    mat_prop.diffuse_color = alb_color.rgb;
+
+    // Gamma to linear
+    mat_prop.base_color = gamma_to_linear(alb_color.rgb);
+    mat_prop.diffuse_color = mat_prop.base_color;
     mat_prop.alpha = alb_color.a;
 
     // Clamping the values for avoid stinky division/multiplication by 0
     mat_prop.roughness = clamp(mat_prop.roughness, 0.01, 1.0);
     mat_prop.metalness = clamp(mat_prop.metalness, 0.01, 1.0);
-
-    mat_prop.diffuse_color = gamma_to_linear(mat_prop.diffuse_color);
 
     mat_prop.specular_color = mix(vec3(0.04), mat_prop.diffuse_color, mat_prop.metalness);
     mat_prop.diffuse_color = mix(mat_prop.diffuse_color, vec3(0.0), mat_prop.metalness);
@@ -193,7 +203,7 @@ sMaterial getMaterialProperties_v3(vec2 uv) {
     return mat_prop;
 }
 
-// PBR FUNCTIONS
+// PBR FUNCTIONS ===============
 float normal_Distribution_function(sVectors vects, sMaterial mat_props) {
     //return ((mat_props.roughness + 2.0) / (2.0 * PI)) * pow(vects.n_dot_h, mat_props.roughness);
     float alpha = mat_props.roughness * mat_props.roughness;
@@ -213,67 +223,59 @@ float Geometry_atenuation_term(sVectors vects, sMaterial mat_props) {
 }
 
 vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
-    // PBR
+    // PBR =======
     // BRDF Diffuse: Lambertian
     vec3 diffuse_contribution = mat_props.diffuse_color;
 
     // BRDF Specular: Cook-Torrance
     vec3 fresnel = FresnelSchlickRoughness(vects.n_dot_v, mat_props.specular_color, mat_props.roughness);
-    //vec3 fresnel = fresnelSchlick(vects.n_dot_h, mat_props.specular_color);
     float normalization_factor = (4.0 * vects.n_dot_v * vects.l_dot_n) + 0.0001;
-    
     vec3 specular_contribution = (fresnel * Geometry_atenuation_term(vects, mat_props) * normal_Distribution_function(vects, mat_props)) / normalization_factor;
 
     vec3 BRDF = diffuse_contribution + specular_contribution;
 
     vec3 radiance = u_light_radiance.rgb;
-
     vec3 direct_light_result = BRDF * radiance * vects.l_dot_n;
 
-    // IBL
+    // IBL =======
     vec2 uv_LUT = vec2(vects.n_dot_v, mat_props.roughness);
-    //vec2 uv_LUT = vec2(clamp(vects.n_dot_v, 0.01, 1.0), clamp(mat_props.roughness, 0.01, 1.0));
 
+    // Specular IBL
     vec2 LUT_brdf = texture2D(u_brdf_LUT, uv_LUT).rg;
-    //vec2 LUT_brdf = texture2D(u_brdf_LUT, vec2(clamp(vects.n_dot_v, 0.01, 1.0), clamp(mat_props.roughness, 0.01, 1.0))).rg;
-
     vec3 fresnel_IBL = FresnelSchlickRoughness(vects.n_dot_v, mat_props.specular_color, mat_props.roughness);
-
     vec3 specular_sample = getReflectionColor(vects.reflect, mat_props.roughness);
-
     vec3 specular_IBL = ((fresnel_IBL * LUT_brdf.x) + LUT_brdf.y) * specular_sample;
     
-    // Artificially increasing the roughness so there are softer reflections on the diffuse IBL
-    vec3 diffuse_IBL = mat_props.diffuse_color * getReflectionColor(vects.normal, mat_props.roughness * 9.0);
+    // Setting a high roughness value so there are softer reflections on the diffuse IBL
+    vec3 diffuse_IBL = mat_props.diffuse_color * getReflectionColor(vects.normal, 2.0);
 
     // Energy conservation substraction
     diffuse_IBL = diffuse_IBL * (1.0 - fresnel_IBL);
 
     vec3 IBL_light_result = specular_IBL + (diffuse_IBL);
 
-    //return specular_IBL;
-    //return vec3(LUT_brdf, 0.0);
-    //return fresnel_IBL;
-    //return IBL_light_result;
-    //return direct_light_result;
+    // Result =======
     return direct_light_result + IBL_light_result;
 }
 
-// POM
+// POM FUNCTIONS ===============
 float get_height(vec2 uv_coords) {
     if (u_material_mode == 2.0) {
         return 1.0 - (texture2D(u_normal_map, uv_coords).a * 2.0 - 1.0);
     }
-
+    // TODO: Alternative heightmap location
     return 1.0 - (texture2D(u_normal_map, uv_coords).a * 2.0 - 1.0);
 }
 
 vec2 get_POM_coords(vec2 base_coords, vec3 view_vector) {
     float map_depth = get_height(base_coords);
     float layer_depth = 0.0;
+    // Step depth size
     float layer_step = 1.0 / u_POM_resolution;
+    // Starting point
     vec2 it_coords = base_coords;
     vec2 prev_coords = vec2(0);
+    // Direction for the layer look up
     vec2 step_vector = ((-view_vector.xy) / view_vector.z * u_POM_depth) / u_POM_resolution ;
 
     // Early stop
@@ -281,28 +283,31 @@ vec2 get_POM_coords(vec2 base_coords, vec3 view_vector) {
         return it_coords;
     }
 
+    // Traverse the layers until you find that you went too low
     for(; layer_depth < 1.0 && map_depth > layer_depth; layer_depth += layer_step) {
         prev_coords = it_coords;
         it_coords -= step_vector;
         map_depth = get_height(it_coords);
     }
 
+    // TODO: Smoothing
+
     return prev_coords;
 }
 
-
+// MAIN ===============
 void main() {
     sVectors frag_vectors = computeVectors();
     sMaterial frag_material;
     vec2 frag_coords;
 
     if (u_POM_enable == 1.0) {
-        mat3 TBN = transpose(cotangent_frame(frag_vectors.normal, frag_vectors.view, v_uv));
-        frag_coords = get_POM_coords(v_uv, (TBN * frag_vectors.view));
+        frag_coords = get_POM_coords(v_uv, frag_vectors.tangent_view);
     } else {
         frag_coords = v_uv;
     }
 
+    // Load the material properties based on the source
     if (u_material_mode == 0.0) {
         frag_material = getMaterialProperties_v1(frag_coords);
     } else if (u_material_mode == 1.0) {
