@@ -84,9 +84,9 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		craft_node->mesh = Mesh::Get("data/meshes/box.ASE");
 		craft_node->model.setTranslation(-5.0f, 0.0f, 0.0f);
 		craft_node->model.scale(0.025f, 0.025f, 0.025f);
-		craft_node->material = new PBRMaterial("data/models/crafting_table/crafting_table_side.png",
-												"data/models/crafting_table/crafting_table_side_s.png",
-												"data/models/crafting_table/crafting_table_side_n.png");
+		craft_node->material = new PBRMaterial("data/models/crafting_table/crafting_table_front.png",
+												"data/models/crafting_table/crafting_table_front_s.png",
+												"data/models/crafting_table/crafting_table_front_n.png");
 		((PBRMaterial*)craft_node->material)->enable_POM = true;
 		((PBRMaterial*)craft_node->material)->POM_depth = 0.075f;
 		node_list.push_back(craft_node);

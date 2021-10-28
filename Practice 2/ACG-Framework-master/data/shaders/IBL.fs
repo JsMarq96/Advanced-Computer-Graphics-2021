@@ -128,7 +128,7 @@ sVectors computeVectors() {
 
     // From world to tangent space
     mat3 inv_TBN = transpose(cotangent_frame(result.normal, result.view, v_uv));
-    result.tangent_view = TBN * result.view;
+    result.tangent_view = inv_TBN * result.view;
 
     return result;
 }
@@ -247,6 +247,7 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     vec3 specular_IBL = ((fresnel_IBL * LUT_brdf.x) + LUT_brdf.y) * specular_sample;
     
     // Setting a high roughness value so there are softer reflections on the diffuse IBL
+    //vec3 diffuse_IBL = mat_props.diffuse_color * textureCube(u_texture_enviorment, vects.normal).rgb;//getReflectionColor(vects.normal, 2.0);
     vec3 diffuse_IBL = mat_props.diffuse_color * getReflectionColor(vects.normal, 2.0);
 
     // Energy conservation substraction
