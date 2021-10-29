@@ -120,23 +120,37 @@ public:
 	Texture* roughness_map = NULL;
 	Texture* metalness_map = NULL;
 	Texture* normal_map = NULL;
+	Texture* opacity_map = NULL;
 	Texture* brdf_LUT = NULL;
+
+	float metalness_mult = 1.0f;
+	float roughness_mult = 1.0f;
 
 	HDReMaterial* hdr_material = NULL;
 
-	int render_output = 0;
-
 	ePBR_Format texture_mode = SEPARETE_TEXTURES;
+
+	bool enable_opacity = false;
 
 	bool enable_POM = false;
 	int POM_resulution = 32;
 	float POM_depth = 0.2f;
 
-	PBRMaterial(const char*         albedo_dir, 
-				const char*         roughness_dir, 
-				const char*         metalness_dir,
-				const ePBR_Format   texture_mode);
+	// Load separate textures
+	PBRMaterial(const char* albedo_dir,
+		const char* roughness_dir,
+		const char* metalness_dir,
+		const char* normal_dir,
+		const char* opacity_dir);
 
+	// Set the mode
+	PBRMaterial(const char* albedo_dir,
+		const char* roughness_dir,
+		const char* metalness_dir,
+		const char* normal_dir,
+		const ePBR_Format   itexture_mode);
+
+	// Miencraft OldPBR
 	PBRMaterial(const char* albedo_dir,
 		const char* roughness_dir,
 		const char* normal_dir);
@@ -144,6 +158,7 @@ public:
 	~PBRMaterial();
 
 	void setUniforms(Camera* camera, Matrix44 model);
+	void render(Mesh* mesh, Matrix44 model, Camera* camera);
 	void renderInMenu();
 };
 #endif

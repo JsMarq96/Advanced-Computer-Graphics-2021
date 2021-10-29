@@ -109,6 +109,7 @@ void renderGUI(SDL_Window* window, Application * game)
 			ImGui::ColorEdit3("Light Ambient", (float*)&(scene_data.light.ambient), 0.0f);
 			ImGui::ColorEdit3("Light Diffuse", (float*)&(scene_data.light.diffuse), 0.0f);
 			ImGui::ColorEdit3("Light Specular", (float*)&(scene_data.light.specular), 0.0f);
+			ImGui::Combo("ToneMap", &Application::instance->tonemap, "None\0Simple\0Uncharted\0");
 			ImGui::DragFloat("Exposure", &Application::instance->scene_exposure, 0.01f,-2, 2);
 			ImGui::Combo("Output", &Application::instance->output, "COMPLETE\0ALBEDO\0ROUGHNESS\0\METALNESS\0NORMALS\0");
 			ImGui::TreePop();

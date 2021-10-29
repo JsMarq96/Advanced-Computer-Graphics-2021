@@ -66,6 +66,7 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		ref_node->material = new PBRMaterial("data/models/helmet/albedo.png", 
 											 "data/models/helmet/roughness.png", 
 											 "data/models/helmet/metalness.png",
+											 "data/models/helmet/normal.png",
 											 G_ROUGH_B_METAL);
 
 		node_list.push_back(ref_node);
@@ -80,16 +81,18 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		((PBRMaterial*)diamont_node->material)->enable_POM = true;
 		node_list.push_back(diamont_node);
 
-		SceneNode* craft_node = new SceneNode("Craft node");
-		craft_node->mesh = Mesh::Get("data/meshes/box.ASE");
-		craft_node->model.setTranslation(-5.0f, 0.0f, 0.0f);
-		craft_node->model.scale(0.025f, 0.025f, 0.025f);
-		craft_node->material = new PBRMaterial("data/models/crafting_table/crafting_table_front.png",
-												"data/models/crafting_table/crafting_table_front_s.png",
-												"data/models/crafting_table/crafting_table_front_n.png");
-		((PBRMaterial*)craft_node->material)->enable_POM = true;
-		((PBRMaterial*)craft_node->material)->POM_depth = 0.075f;
-		node_list.push_back(craft_node);
+		SceneNode* lamp_node = new SceneNode("Lamp node");
+		lamp_node->mesh = Mesh::Get("data/models/lantern/lantern.obj.mbin");
+		lamp_node->model.setTranslation(-5.0f, 0.0f, 0.0f);
+		lamp_node->model.scale(0.025f, 0.025f, 0.025f);
+		lamp_node->material = new PBRMaterial("data/models/lantern/albedo.png",
+											   "data/models/lantern/roughness.png", 
+											   "data/models/lantern/metalness.png", 
+												"data/models/lantern/normal.png", 
+												"data/models/lantern/opacity.png");
+		((PBRMaterial*)lamp_node->material)->enable_opacity = true;
+		//((PBRMaterial*)lamp_node->material)->POM_depth = 0.075f;
+		node_list.push_back(lamp_node);
 	}
 	
 	//hide the cursor

@@ -39,6 +39,7 @@ public:
 	bool render_debug;
 	float scene_exposure;
 	int output;
+	int tonemap = 1;
 
 	//some vars
 	static Camera* camera; //our GLOBAL camera

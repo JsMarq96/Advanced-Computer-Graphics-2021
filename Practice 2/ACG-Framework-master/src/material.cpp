@@ -218,18 +218,38 @@ void HDReMaterial::setUniforms(Camera* camera, Matrix44 model) {
 		shader->setTexture("u_texture", prem[display_level-1]);
 	}
 
+	shader->setUniform("u_tonemap_mode", (float)Application::instance->tonemap);
 	StandardMaterial::setUniforms(camera, model);
 }
 
 
 // PBR MATERIAL
+PBRMaterial::PBRMaterial(const char* albedo_dir,
+		const char* roughness_dir,
+		const char* metalness_dir,
+		const char* normal_dir,
+		const char* opacity_dir) {
+	albedo_map = Texture::Get(albedo_dir);
+	roughness_map = Texture::Get(roughness_dir);
+	metalness_map = Texture::Get(metalness_dir);
+	opacity_map = Texture::Get(opacity_dir);
+	normal_map = Texture::Get(normal_dir);
+	brdf_LUT = Texture::Get("data/brdfLUT.png");
+
+	shader = Shader::Get("data/shaders/IBL.vs", "data/shaders/IBL.fs");
+
+	texture_mode = SEPARETE_TEXTURES;
+}
+
 PBRMaterial::PBRMaterial(const char*         albedo_dir,
 						 const char*         roughness_dir, 
 						 const char*         metalness_dir,
+						 const char*		 normal_dir,
 						 const ePBR_Format   itexture_mode) {
 	albedo_map = Texture::Get(albedo_dir);
 	roughness_map = Texture::Get(roughness_dir);
 	metalness_map = Texture::Get(metalness_dir);
+	normal_map = Texture::Get(normal_dir);
 	brdf_LUT = Texture::Get("data/brdfLUT.png");
 
 
@@ -253,6 +273,7 @@ PBRMaterial::PBRMaterial(const char* albedo_dir,
 }
 
 PBRMaterial::~PBRMaterial() {
+	delete opacity_map;
 	delete albedo_map;
 	delete roughness_map;
 	delete normal_map;
@@ -282,17 +303,40 @@ void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	if (normal_map) shader->setTexture("u_normal_map", normal_map);
 	shader->setTexture("u_brdf_LUT", brdf_LUT);
 
-	shader->setUniform("u_output_mode", (float)render_output);
+	shader->setUniform("u_output_mode", (float) Application::instance->output);
+	shader->setUniform("u_tonemap_mode", (float)Application::instance->tonemap);
 	shader->setUniform("u_material_mode", (float)(int)texture_mode);
 
 	// POM parameters
 	shader->setUniform("u_POM_enable", (enable_POM) ? 1.0f : 0.0f);
 	shader->setUniform("u_POM_resolution", (float) POM_resulution);
 	shader->setUniform("u_POM_depth", POM_depth);
+
+	// Opacity map
+	shader->setUniform("u_opacity_enable", (enable_opacity) ? 1.0f : 0.0f);
+	if (enable_opacity && opacity_map) {
+		shader->setTexture("u_opacity_map", opacity_map);
+	}
+}
+
+void PBRMaterial::render(Mesh* mesh, Matrix44 model, Camera* camera) {
+
+	if (opacity_map) {
+		glDisable(GL_CULL_FACE);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
+	StandardMaterial::render(mesh, model, camera);
+
+	if (opacity_map) {
+		glEnable(GL_CULL_FACE);
+		glDisable(GL_BLEND);
+	}
 }
 
 void PBRMaterial::renderInMenu() {
-	ImGui::Combo("Render output:", (int*)&render_output, "Color\0Diffuse\0Roughness\0Metalness\0");
+	ImGui::Checkbox("Enable Opacity", &enable_opacity);
 	ImGui::Checkbox("Enable POM", &enable_POM);
 	
 	if (enable_POM) {
