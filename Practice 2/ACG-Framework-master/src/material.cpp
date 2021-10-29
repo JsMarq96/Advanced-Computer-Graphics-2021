@@ -322,7 +322,8 @@ void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
 void PBRMaterial::render(Mesh* mesh, Matrix44 model, Camera* camera) {
 
 	if (opacity_map) {
-		glDisable(GL_CULL_FACE);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
@@ -330,7 +331,7 @@ void PBRMaterial::render(Mesh* mesh, Matrix44 model, Camera* camera) {
 	StandardMaterial::render(mesh, model, camera);
 
 	if (opacity_map) {
-		glEnable(GL_CULL_FACE);
+		glDisable(GL_CULL_FACE);
 		glDisable(GL_BLEND);
 	}
 }

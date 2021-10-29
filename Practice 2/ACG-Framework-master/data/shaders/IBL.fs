@@ -322,6 +322,8 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     vec3 radiance = u_light_radiance.rgb;
     vec3 direct_light_result = BRDF * radiance * mat_props.l_dot_n;
 
+    //return fresnel;
+
     // IBL =======
     vec2 uv_LUT = vec2(mat_props.n_dot_v, mat_props.roughness);
 
