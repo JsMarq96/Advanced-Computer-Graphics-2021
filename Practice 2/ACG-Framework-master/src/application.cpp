@@ -45,7 +45,7 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 
 	// Create camera
 	camera = new Camera();
-	camera->lookAt(Vector3(5.f, 5.f, 5.f), Vector3(0.f, 0.0f, 0.f), Vector3(0.f, 1.f, 0.f));
+	camera->lookAt(Vector3(0.f, 1.f, 6.5f), Vector3(0.f, 0.0f, 0.f), Vector3(0.f, 1.f, 0.f));
 	camera->setPerspective(45.f,window_width/(float)window_height,0.1f,10000.f); //set the projection, we want to be perspective
 
 	// Scene setup
@@ -61,20 +61,20 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		scene_data.light.position = { 0.0f, 25.0f, 2.0f };
 
 		
-		SceneNode* ref_node = new SceneNode("Helmet node");
-		ref_node->mesh = Mesh::Get("data/models/helmet/helmet.obj.mbin");
-		ref_node->material = new PBRMaterial("data/models/helmet/albedo.png", 
+		SceneNode* helmet = new SceneNode("Helmet node");
+		helmet->mesh = Mesh::Get("data/models/helmet/helmet.obj.mbin");
+		helmet->material = new PBRMaterial("data/models/helmet/albedo.png",
 											 "data/models/helmet/roughness.png", 
 											 "data/models/helmet/metalness.png",
 											 "data/models/helmet/normal.png",
 											 G_ROUGH_B_METAL);
 
-		node_list.push_back(ref_node);
+		node_list.push_back(helmet);
 
 		SceneNode* diamont_node = new SceneNode("Diamond node");
 		diamont_node->mesh = Mesh::Get("data/meshes/box.ASE");
 		diamont_node->model.setTranslation(5.0f, 0.0f, 0.0f);
-		diamont_node->model.scale(0.025f, 0.025f, 0.025f);
+		diamont_node->model.scale(0.015f, 0.015f, 0.015f);
 		diamont_node->material = new PBRMaterial("data/models/crafting_table/1.png",
 												"data/models/crafting_table/1_s.png",
 												"data/models/crafting_table/1_n.png");
@@ -83,7 +83,7 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 
 		SceneNode* lamp_node = new SceneNode("Lamp node");
 		lamp_node->mesh = Mesh::Get("data/models/lantern/lantern.obj.mbin");
-		lamp_node->model.setTranslation(-5.0f, 0.0f, 0.0f);
+		lamp_node->model.setTranslation(-5.0f, -0.8f, 0.0f);
 		lamp_node->model.scale(0.025f, 0.025f, 0.025f);
 		lamp_node->material = new PBRMaterial("data/models/lantern/albedo.png",
 											   "data/models/lantern/roughness.png", 
@@ -91,7 +91,6 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 												"data/models/lantern/normal.png", 
 												"data/models/lantern/opacity.png");
 		((PBRMaterial*)lamp_node->material)->enable_opacity = true;
-		//((PBRMaterial*)lamp_node->material)->POM_depth = 0.075f;
 		node_list.push_back(lamp_node);
 	}
 	

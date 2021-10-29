@@ -134,7 +134,7 @@ public:
 
 	bool enable_POM = false;
 	int POM_resulution = 32;
-	float POM_depth = 0.2f;
+	float POM_depth = 0.134f;
 
 	// Load separate textures
 	PBRMaterial(const char* albedo_dir,

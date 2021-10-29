@@ -42,6 +42,11 @@ uniform float u_POM_depth;
 const float GAMMA = 2.2;
 const float INV_GAMMA = 1.0 / GAMMA;
 
+
+// ===================================================
+// DATA STRUCTS
+// ===================================================
+
 struct sVectors {
     vec3 normal;
     vec3 view;
@@ -69,7 +74,10 @@ struct sMaterial {
     float l_dot_n;
 };
 
-// PROVIDED FUNCTIONS ===============
+// ===================================================
+// PROVIDED FUNCTIONS 
+// ===================================================
+
 vec3 getReflectionColor(vec3 r, float roughness)
 {
 	float lod = roughness * 5.0;
@@ -164,7 +172,10 @@ vec3 toneMapUncharted(vec3 color)
     return color * whiteScale;
 }
 
-// CUSTOM FUNCTIONS ===============
+// ===================================================
+// CUSTOM FUNCTIONS 
+// ===================================================
+
 sVectors computeVectors() {
     sVectors result;
     result.normal = normalize(v_normal);
@@ -185,7 +196,17 @@ sVectors computeVectors() {
     return result;
 }
 
-// MATERIAL PROPERTIES ===============
+// ===================================================
+// MATERIAL PROPERTIES FUNCTIONS
+// ===================================================
+
+/**
+    Each one of these funcions loads the data based on the texture format:
+    We currently support 3 formats:
+        -V1: each data is stored on the corresponding texture file
+        -V2: each data is in a different texture, with the exception of metalness that is the the G channel of the roughness map
+        -V3: is stored on the Minecraft OldPBR format
+*/
 sMaterial getMaterialProperties_v1(sVectors vects, vec2 uv) {
     // Each property is a separed texture
     sMaterial mat_prop;
@@ -288,7 +309,10 @@ sMaterial getMaterialProperties_v3(sVectors vects, vec2 uv) {
     return mat_prop;
 }
 
-// PBR FUNCTIONS ===============
+// ===================================================
+// PBR FUNCTIONS
+// ===================================================
+
 float normal_Distribution_function(sVectors vects, sMaterial mat_props) {
     //return ((mat_props.roughness + 2.0) / (2.0 * PI)) * pow(vects.n_dot_h, mat_props.roughness);
     float alpha = mat_props.roughness * mat_props.roughness;
@@ -322,8 +346,6 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     vec3 radiance = u_light_radiance.rgb;
     vec3 direct_light_result = BRDF * radiance * mat_props.l_dot_n;
 
-    //return fresnel;
-
     // IBL =======
     vec2 uv_LUT = vec2(mat_props.n_dot_v, mat_props.roughness);
 
@@ -346,7 +368,10 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     return direct_light_result + IBL_light_result;
 }
 
-// POM FUNCTIONS ===============
+// ===================================================
+// POM FUNCTIONS
+// ===================================================
+
 float get_height(vec2 uv_coords) {
     if (u_material_mode == 2.0) {
         return 1.0 - (texture2D(u_normal_map, uv_coords).a * 2.0 - 1.0);
@@ -355,16 +380,22 @@ float get_height(vec2 uv_coords) {
     return 1.0 - (texture2D(u_normal_map, uv_coords).a * 2.0 - 1.0);
 }
 
+/**
+* Iterate through the heighmap with the direction of the tangential view vector
+* NOTE: There is some artifacts on some extrems parts that a simple smoothing could not solve
+*       But increasing the resolution of the POM effect makes it a bit better
+*/
 vec2 get_POM_coords(vec2 base_coords, vec3 view_vector) {
     float map_depth = get_height(base_coords);
     float layer_depth = 0.0;
+    float prev_layer_depth = 0.0;
     // Step depth size
     float layer_step = 1.0 / u_POM_resolution;
     // Starting point
     vec2 it_coords = base_coords;
     vec2 prev_coords = vec2(0);
     // Direction for the layer look up
-    vec2 step_vector = ((-view_vector.xy) / view_vector.z * u_POM_depth) / u_POM_resolution;
+    vec2 step_vector = ((-view_vector.xy) * u_POM_depth) / u_POM_resolution;
 
     // Early stop
     if (map_depth == 0.0) {
@@ -378,12 +409,14 @@ vec2 get_POM_coords(vec2 base_coords, vec3 view_vector) {
         map_depth = get_height(it_coords);
     }
 
-    // TODO: Smoothing
-
-    return prev_coords;
+    // Smooth between the current and previus layer's depths based on the actual depth
+    return mix(it_coords, prev_coords, (layer_depth - map_depth) / layer_step );
 }
 
-// MAIN ===============
+// ===================================================
+// MAIN
+// ===================================================
+
 void main() {
     sVectors frag_vectors = computeVectors();
     sMaterial frag_material;
@@ -411,6 +444,7 @@ void main() {
 
     vec3 color = getPixelColor(frag_vectors, frag_material);
 
+    // Tonemapping modes
     if (u_tonemap_mode == 1.0) {
         color = toneMap(color);
     } else if (u_tonemap_mode == 2.0) {
@@ -429,6 +463,8 @@ void main() {
         output_color = vec3(frag_material.roughness, frag_material.roughness, frag_material.roughness);
     } else if (u_output_mode == 3.0) {
         output_color = vec3(frag_material.metalness, frag_material.metalness, frag_material.metalness);
+    } else if (u_output_mode == 4.0) {
+        output_color = vec3(frag_material.normal);
     }
     gl_FragColor = vec4(output_color, frag_material.alpha);
 }
