@@ -324,7 +324,7 @@ float normal_Distribution_function(sVectors vects, sMaterial mat_props) {
 
 float Geometry_atenuation_term(sVectors vects, sMaterial mat_props) {
     // Using Epic's aproximation
-    float r = 1.0 + 1.0;
+    float r = mat_props.roughness + 1.0;
     float k = (r * r) / 8.0;
     float G1 = mat_props.n_dot_v / (mat_props.n_dot_v * (1.0 - k) + k);
     float G2 = mat_props.l_dot_n / (mat_props.l_dot_n * (1.0 - k) + k);
@@ -356,7 +356,6 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     vec3 specular_IBL = ((fresnel_IBL * LUT_brdf.x) + LUT_brdf.y) * specular_sample;
     
     // Setting a high roughness value so there are softer reflections on the diffuse IBL
-    //vec3 diffuse_IBL = mat_props.diffuse_color  / PI * getReflectionColor(vects.normal, mat_props.roughness);
     vec3 diffuse_IBL = mat_props.diffuse_color / PI * getReflectionColor(mat_props.normal, 1.0);
 
     // Energy conservation substraction
