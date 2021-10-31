@@ -17,6 +17,10 @@ uniform sampler2D u_height_map;
 
 uniform sampler2D u_brdf_LUT;
 
+// Material multipliyers
+uniform float u_metalness_mult;
+uniform float u_roughness_mult;
+
 // HDRE textures
 uniform samplerCube u_texture_enviorment; 
 uniform samplerCube u_texture_prem_0; 
@@ -210,8 +214,9 @@ sVectors computeVectors() {
 sMaterial getMaterialProperties_v1(sVectors vects, vec2 uv) {
     // Each property is a separed texture
     sMaterial mat_prop;
-    mat_prop.roughness = texture2D(u_rough_map, uv).r;
-    mat_prop.metalness = texture2D(u_metal_map, uv).r;
+    // Fetch the materials and added the multpilers
+    mat_prop.roughness = texture2D(u_rough_map, uv).r * u_roughness_mult;
+    mat_prop.metalness = texture2D(u_metal_map, uv).r * u_metalness_mult;
 
     mat_prop.normal = normalize(perturbNormal(vects.normal, vects.view, uv, texture2D(u_normal_map, uv).rgb));
 
@@ -245,8 +250,9 @@ sMaterial getMaterialProperties_v1(sVectors vects, vec2 uv) {
 sMaterial getMaterialProperties_v2(sVectors vects, vec2 uv) {
     // Metalness and roughness are defined on the same texture file
     sMaterial mat_prop;
-    mat_prop.roughness = texture2D(u_rough_map, uv).g;
-    mat_prop.metalness = texture2D(u_rough_map, uv).b;
+    // Fetch the materials and added the multpilers
+    mat_prop.roughness = texture2D(u_rough_map, uv).g * u_roughness_mult;
+    mat_prop.metalness = texture2D(u_rough_map, uv).b * u_metalness_mult;
 
     mat_prop.normal = normalize(perturbNormal(vects.normal, vects.view, uv, texture2D(u_normal_map, uv).rgb));
 
@@ -281,8 +287,9 @@ sMaterial getMaterialProperties_v3(sVectors vects, vec2 uv) {
     // Minecraft OldPBR format
     sMaterial mat_prop;
     // Convert the smoothness to roughness
-    mat_prop.roughness = 1.0 - texture2D(u_rough_map, uv).r;
-    mat_prop.metalness = texture2D(u_rough_map, uv).g;
+    mat_prop.roughness = (1.0 - texture2D(u_rough_map, uv).r);
+    mat_prop.roughness = mat_prop.roughness * mat_prop.roughness * u_roughness_mult;
+    mat_prop.metalness = texture2D(u_rough_map, uv).g * u_metalness_mult;
     // mat_prop.emisiveness = texture2D(u_rough_map, v_uv).b;
 
     mat_prop.normal = normalize(perturbNormal(vects.normal, vects.view, uv, texture2D(u_normal_map, uv).rgb));

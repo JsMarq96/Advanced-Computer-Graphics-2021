@@ -288,6 +288,10 @@ void PBRMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	if (normal_map) shader->setTexture("u_normal_map", normal_map);
 	shader->setTexture("u_brdf_LUT", brdf_LUT);
 
+	// Material properties
+	shader->setUniform("u_metalness_mult", metalness_mult);
+	shader->setUniform("u_roughness_mult", roughness_mult);
+
 	shader->setUniform("u_output_mode", (float) Application::instance->output);
 	shader->setUniform("u_tonemap_mode", (float)Application::instance->tonemap);
 	shader->setUniform("u_material_mode", (float)(int)texture_mode);
@@ -329,6 +333,9 @@ void PBRMaterial::render(Mesh* mesh, Matrix44 model, Camera* camera) {
 }
 
 void PBRMaterial::renderInMenu() {
+	ImGui::SliderFloat("Metalness mult.", &metalness_mult, 0.005f, 2.0f);
+	ImGui::SliderFloat("Roughness mult.", &roughness_mult, 0.005f, 2.0f);
+
 	ImGui::Checkbox("Enable Opacity", &enable_opacity);
 	ImGui::Checkbox("Enable POM", &enable_POM);
 	
