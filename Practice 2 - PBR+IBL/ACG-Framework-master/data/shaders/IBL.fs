@@ -363,7 +363,7 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     vec3 specular_IBL = ((fresnel_IBL * LUT_brdf.x) + LUT_brdf.y) * specular_sample;
     
     // Setting a high roughness value so there are softer reflections on the diffuse IBL
-    vec3 diffuse_IBL = mat_props.diffuse_color / PI * getReflectionColor(mat_props.normal, 1.0);
+    vec3 diffuse_IBL = mat_props.diffuse_color * getReflectionColor(mat_props.normal, 1.0);
 
     // Energy conservation substraction
     diffuse_IBL = diffuse_IBL * (1.0 - fresnel_IBL);
