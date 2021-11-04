@@ -9,8 +9,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "4 - Volume.md",
-            "mode": "preview"
+            "file": "4 - Volume preparacion.md",
+            "mode": "source"
           }
         }
       }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "4 - Volume.md",
+                "file": "4 - Volume preparacion.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,10 +88,11 @@
   },
   "active": "ea69d3a30f1e52e8",
   "lastOpenFiles": [
+    "4 - Volume preparacion.md",
     "4 - Volume.md",
-    "3-Pbr ibl preparation.md",
-    "3-PBR IBL.md",
     "2-PBR.md",
+    "3-PBR IBL.md",
+    "3-Pbr ibl preparation.md",
     "1-Intro a Visualizacion avanzada.md"
   ]
 }
