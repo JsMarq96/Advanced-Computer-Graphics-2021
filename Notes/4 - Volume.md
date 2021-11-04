@@ -160,7 +160,7 @@ Se pueden plantear de 2 maneras:
 	- Mappeado pre interpolacion: se samplea las propiedades opticas de los datos volumetricos (la funcion de transferencia se aplico antes).
 	- Mapeado pos interpolacion: interpola los datos volumetricos para obtener samples y luego se aplica la funcion de transferencia a esos datos.
 	
-## Interpolacion en Grids uniformes
+## Interpolacion en Grids uniformes: LERP & Friends
 Las interpolaciones mas comunes en computer grapchis son:
 - Lineal: $f(p) \approx (1- x)f(v_i) + xf(v_{i+1})$
 - Bilineal: $f(p) \approx (1-x)(1-y)f(v_{i,j}) + x(1-y)f(v_{i+1,j}) + (1-x)yf(v_{i,j+1}) + xyf(v_{i+1,j+1})$
@@ -168,4 +168,12 @@ Las interpolaciones mas comunes en computer grapchis son:
 Para samplear e interpolar datos de varias dimensiones de manera correcta.
 NOTA: tanto la bilinieal como la trilineal se puede pensar como una composicion de interpoalciones lineales (LERP), como:
 		$$biLERP(quad, point) = LERP(LERP(quad.corner1, quad.corner2, point.x),  LERP(quad.corner3, quad.corner4, point.x), point.y)$$
-## Interpolacion en Grids no uniformes
+## Interpolacion en Grids no uniformes: baricentricas
+A veces el sampling no es uniforme, y depednecide de la forma del grid se pueden usar otras maneras de obtener samples, que se apadapten.
+
+En el caso de figuras tetrahedrales, se usan las coordenadas barycentricas
+
+- 2D: Una figura tetrahedral en 2D es un triangulo, y se interpola convertiendo los vertices en coordenads baricentricas (x,y) -> $(\lambda_1, \lambda_2, \lambda_3)$, siempre y cuando $\lambda_1 + \lambda_2 + \lambda_3 = 1$ y los extremos sean (0,0,1), (1,0,0), (0,1,0).
+		$$f(p) = \lambda_1 f(v_1) + \lambda_2 f(v_2) + \lambda_3 f(v_3)$$
+- 3D es similar, pero las coordenadas son 4 dimensiones $(\lambda_1, \lambda_2, \lambda_3, \lambda_4)$
+		$$f(p) = \lambda_1 f(v_1) + \lambda_2 f(v_2) + \lambda_3 f(v_3) + \lambda_4 f(v_4)$$
