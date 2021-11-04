@@ -92,7 +92,7 @@ Se empieza desde el frente (la camara) y se va moviendo en itnervalos de s $\Del
 Parteindo de la integral de renderizado de volumen:
  $$L(u) = \int^u_{s_0} L_e(s) e^{- \int^u_{s} \mu_a(t) dt} ds$$
 La idea es aproximar la integral de renderizado:
-$$L(u) \approx \sum_{i=0}^{N-1} L_{ei} (e^{- \mu_j \Delta_j}) \Delta_i$$
+$$L(u) \approx \sum_{i=0}^{N-1} L_{ei} \prod_{j=0}^{i-1}(e^{- \mu_j \Delta_j}) \Delta_i$$
  Y podemos aproximas la exponencial con los 2 primeros terminos del polinomio de taylor en 0: $e^{-\mu \Delta} \approx 1 - \mu \Delta$
  $$L(u) \approx \sum^{N-1}_{i=0} L_{ei}( \prod^{i-1}_{j=0}(1 - \mu_j \Delta_j)) \Delta_i$$
  En el que $L_{ei} = L_e(s_i)$, $\Delta_i = s_{i+1} - s_i$ y $\mu_i = \mu_a(s_i)$ siendo i la iteracion actual/punto que estamos calculando
