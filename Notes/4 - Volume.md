@@ -90,7 +90,7 @@ El que mas se utiliza
 Se empieza desde el frente (la camara) y se va moviendo en itnervalos de s $\Delta s$ en los que se va anadiendo las contribuciones tenuadas de cada punto, hasta que llegemos a la parte trasera.
 
 Parteindo de la integral de renderizado de volumen:
- $$L(u) = \int^{u}_{s_0} L_e(s) e^{- \int^u_{s} \mu_a(t) dt} ds$$
+ $$L(u) = \int^u_{s_0} L_e(s) e^{- \int^u_{s} \mu_a(t) dt} ds$$
 La idea es aproximar la integral de renderizado:
 $$L(u) =  L_{ei}( \prod^{i-1}_{j=0}(e^{- \mu_j \Delta_j})) \Delta_i$$
  Y podemos aproximas la exponencial con los 2 primeros terminos del polinomio de taylor en 0: $e^{-\mu \Delta} \approx 1 - \mu \Delta$
