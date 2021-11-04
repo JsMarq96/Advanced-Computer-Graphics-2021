@@ -1,3 +1,5 @@
+## Preparacion para el examen:
+
 3 
 This function represents the diffuse factor of a BRDF, more concretly the Lambertian aproximation of the diffuse, that is based on a Base color divided by pi/ with is the area of the unit hemisphere.
 
@@ -30,3 +32,9 @@ Instead, we are going to calculate N samples, of the hemisphere, living us with 
 Now in order to increase the accuracy, we divide the elemtns of the sum with the probabliity function, of the samples, including it.
 
 One important part is that he sampling shlud not be random, since this greatly impacts theaccuracy of the model, so using some kind of priority or importance probablity funcion is required.
+
+
+
+If the system is lenar then you can get this things in constant time???
+
+It is NOT time invariant

@@ -344,7 +344,7 @@ vec3 getPixelColor(sVectors vects, sMaterial mat_props) {
     vec3 diffuse_contribution = mat_props.diffuse_color;
 
     // BRDF Specular: Cook-Torrance
-    vec3 fresnel = FresnelSchlickRoughness(mat_props.n_dot_v, mat_props.specular_color, mat_props.roughness);
+    vec3 fresnel = FresnelSchlickRoughness(mat_props.n_dot_h, mat_props.specular_color, mat_props.roughness);
     float normalization_factor = (4.0 * mat_props.n_dot_v * mat_props.l_dot_n) + 0.0001;
     vec3 specular_contribution = (fresnel * Geometry_atenuation_term(vects, mat_props) * normal_Distribution_function(vects, mat_props)) / normalization_factor;
 
