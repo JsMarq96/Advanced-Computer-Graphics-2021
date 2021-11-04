@@ -105,13 +105,7 @@ La idea es aproximar la integral de renderizado:
  
  # Rayscasting
  Lanzar rayos desde la camara para ver si colisinan con el objeto y lo transpasan
- Se tocara ams en los eminarios
- 
- # Discretizacion: Voxeles y grids
- ## Voxeles
- Un voxel peude ser tanto una represetnacion de un volumen, como una representacion de puntos en 3D
- Es una representacion compatible con un grid uniforme
- 
+ Se tocara mas en los eminarios
  
  
  # Fuentes de informacion
@@ -119,14 +113,24 @@ La idea es aproximar la integral de renderizado:
  
  En medicina, las imagenes de rayos X son imagenes 2D,q ue resultan de la absorcion de rayos x dada una fuente
  
- CT: son "slices" de muchas imagenes de rayos X, por lo que al usar muchas tomadas con distancias y precios adecauadas, se puede conseguir una imagen 3D
+ - CT (computerized topography): son "slices" de muchas imagenes de rayos X, por lo que al usar muchas tomadas con distancias y precios adecauadas, se puede conseguir una imagen 3D
  
- MRI: emplea campos magneticos muy pontentes para interactuas con la matera, generando cambios que producen luz; y con ellos imagenes de 3 dimensiones
+-  MRI: capta los resultados de la radiacion de los atomos cuando se exponenen a campos magenticos muy fuertes. Puede porducir datos tridimensionales.
+-  Ultrasonidos: 3D
+-  PET: 3D
+-  Simulaciones: number crunching para producir resutlados que se enecesitan visualizar, como simulaciones dinamicas de fluidos. El grid usado para el sampling es generalmente usado tambien para la representacion!
  
  Los rayor x y los Ct muestras estrucutra y composincion, pero los MRI muestras procesos y funcionalidad; por lo que se suelen juntar para tener informacion adicional.
  
  Aqui tambine entran las ecografias, que se usan para obejtener imagenes en 2D y 3D
  
+  # Discretizacion: Voxeles y grids
+ La informacion obtenida ha de ser almacenada en alguna manera, en una forma de que ayude al analisis de esta:
+ ## Voxeles
+ Un voxel peude ser tanto una represetnacion de un volumen, como una representacion de puntos en 3D
+ Es una representacion compatible con un grid uniforme; y generalmente se toamara samples de manera uniforme y se interpolara entre las samples para conseguir una represetnacion mcas copmleta entre las samples.
+ 
+ Generlamente para representar en voxeles se empleara interpolacion trilineal.
  
  # Pipeline de renderizado de volumenes
  Pasos:
@@ -158,9 +162,10 @@ Se pueden plantear de 2 maneras:
 	
 ## Interpolacion en Grids uniformes
 Las interpolaciones mas comunes en computer grapchis son:
-	- Lineal
-	- Bilineal
-	- Trilinal
+- Lineal: $f(p) \approx (1- x)f(v_i) + xf(v_{i+1})$
+- Bilineal: $f(p) \approx (1-x)(1-y)f(v_{i,j}) + x(1-y)f(v_{i+1,j}) + (1-x)yf(v_{i,j+1}) + xyf(v_{i+1,j+1})$
+- Trilinal: $f(p) \approx (1-x)(1-y)(1-z)f(v_{i,j,k}) + x(1-y)(1-z)f(v_{i+1,j,k}) + x(1-y)zf(v_{i+1,j,k+1}) + (1-x)y(1-z)f(v_{i,j+1,k}) +(1-x)yzf(v_{i,j+1,k+1}) + xyzf(v_{i+1,j+1,k+1})$
 Para samplear e interpolar datos de varias dimensiones de manera correcta.
-
+NOTA: tanto la bilinieal como la trilineal se puede pensar como una composicion de interpoalciones lineales (LERP), como:
+		$$biLERP(quad, point) = LERP(LERP(quad.corner1, quad.corner2, point.x),  LERP(quad.corner3, quad.corner4, point.x), point.y)$$
 ## Interpolacion en Grids no uniformes
