@@ -9,8 +9,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "4 - Volume preparacion.md",
-            "mode": "source"
+            "file": "4 - Volume.md",
+            "mode": "preview"
           }
         }
       }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "4 - Volume preparacion.md",
+                "file": "4 - Volume.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,8 +88,8 @@
   },
   "active": "ea69d3a30f1e52e8",
   "lastOpenFiles": [
-    "4 - Volume preparacion.md",
     "4 - Volume.md",
+    "4 - Volume preparacion.md",
     "2-PBR.md",
     "3-PBR IBL.md",
     "3-Pbr ibl preparation.md",
