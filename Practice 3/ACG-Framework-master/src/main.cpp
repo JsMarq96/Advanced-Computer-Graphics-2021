@@ -45,7 +45,7 @@ SDL_Window* createWindow(const char* caption, int width, int height, bool fullsc
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 
 	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 8);
 	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
 	//antialiasing (disable this lines if it goes too slow)

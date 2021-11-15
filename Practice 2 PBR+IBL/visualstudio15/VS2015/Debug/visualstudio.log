@@ -1,86 +1,227 @@
-﻿  application.cpp
+﻿  animation.cpp
+  camera.cpp
+  box.cpp
+  box_bld.cpp
+  coldet.cpp
+  coldet_bld.cpp
+  math3d.cpp
+  mytritri.cpp
+  sysdep.cpp
+  hdre.cpp
+  ImCurveEdit.cpp
+  ImGradient.cpp
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\animation.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\animation.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\animation.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\animation.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\camera.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\camera.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\camera.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\camera.cpp)
+  imgui.cpp
+  ImGuizmo.cpp
+  imgui_demo.cpp
+  imgui_impl_opengl3.cpp
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\extra\coldet\coldet.cpp(374,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  imgui_impl_sdl.cpp
+  imgui_widgets.cpp
+  ImSequencer.cpp
+  picopng.cpp
+  pvmparser.cpp
+  textparser.cpp
+  fbo.cpp
+  framework.cpp
+  application.cpp
+  input.cpp
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\framework.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\framework.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\framework.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\framework.cpp)
   main.cpp
   material.cpp
+  mesh.cpp
+  rendertotexture.cpp
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\extra\pvmparser.cpp(28,40): warning C4244: 'argument': conversion from 'const __int64' to 'size_t', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\extra\pvmparser.cpp(32,52): warning C4244: 'argument': conversion from '__int64' to 'size_t', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\extra\pvmparser.cpp(36,33): warning C4244: 'argument': conversion from 'const __int64' to 'size_t', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\extra\pvmparser.cpp(46,46): warning C4244: 'argument': conversion from '__int64' to 'size_t', possible loss of data
   scenenode.cpp
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\animation.cpp(222,14): warning C4101: 'stbuffer': unreferenced local variable
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\mesh.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\mesh.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\mesh.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\mesh.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\material.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\material.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\material.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\material.cpp)
+  shader.cpp
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\scenenode.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\scenenode.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\scenenode.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\scenenode.cpp)
+  skybox_node.cpp
+  texture.cpp
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\skybox_node.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\skybox_node.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\skybox_node.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\skybox_node.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\fbo.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\fbo.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\fbo.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\fbo.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.cpp(1199,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\application.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\application.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\application.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\application.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\input.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\input.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\input.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\input.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\input.cpp(138,24): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\input.cpp(146,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\application.cpp(59,63): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\application.cpp(104,28): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\application.cpp(130,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\application.cpp(131,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\application.cpp(134,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\application.cpp(214,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   utils.cpp
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\material.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\material.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\material.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\material.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\scenenode.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\scenenode.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\scenenode.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\scenenode.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\application.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\application.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\application.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\application.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\utils.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\utils.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\utils.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\utils.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\main.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\main.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\main.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\main.cpp)
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\application.cpp(59,63): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\application.cpp(104,28): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\application.cpp(130,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\application.cpp(131,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\application.cpp(134,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\application.cpp(214,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(334,56): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(335,63): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(360,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(370,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(392,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(394,17): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(407,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(416,14): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(456,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(457,59): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\main.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\main.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\main.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\main.cpp)
+  volume.cpp
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\rendertotexture.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\rendertotexture.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\rendertotexture.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\rendertotexture.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\material.cpp(24,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\main.cpp(109,76): warning C4244: 'argument': conversion from 'float' to 'ImGuiColorEditFlags', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\main.cpp(110,76): warning C4244: 'argument': conversion from 'float' to 'ImGuiColorEditFlags', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\main.cpp(111,78): warning C4244: 'argument': conversion from 'float' to 'ImGuiColorEditFlags', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\main.cpp(114,59): warning C4129: 'M': unrecognized character escape sequence
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\main.cpp(179,46): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\main.cpp(221,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\mesh.cpp(1153,27): warning C4244: 'argument': conversion from 'double' to 'const unsigned int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\mesh.cpp(1154,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\mesh.cpp(1286,40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\mesh.cpp(1286,25): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\mesh.cpp(1288,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\mesh.cpp(1288,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\mesh.cpp(1289,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\mesh.cpp(1296,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\mesh.cpp(1296,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\mesh.cpp(1298,43): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\mesh.cpp(1311,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\mesh.cpp(1334,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\shader.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\shader.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\shader.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\shader.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\shader.cpp(185,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\shader.cpp(224,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\texture.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\texture.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\texture.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\texture.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(18,51): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(18,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(19,56): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(19,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(24,15): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(25,15): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(32,55): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(32,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(33,57): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(33,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(38,15): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(39,15): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(208,125): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(311,94): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(311,87): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(332,102): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(332,94): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(332,87): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(358,111): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(358,104): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(538,18): warning C4244: '=': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(539,19): warning C4244: '=': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\texture.cpp(552,12): warning C4101: 'bytesPerPixel': unreferenced local variable
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\utils.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\utils.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\utils.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\utils.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,109): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\volume.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,100): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\volume.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,91): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\volume.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\framework.h(177,82): warning C4244: 'argument': conversion from 'float' to 'unsigned char', possible loss of data (compiling source file ..\..\src\volume.cpp)
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(334,56): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(335,63): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(360,10): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(370,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(392,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(394,17): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(407,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(416,14): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(456,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(457,59): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(457,44): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(457,44): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(457,29): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(457,29): warning C4244: 'argument': conversion from '_Ty' to 'unsigned int', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(467,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(468,74): warning C4244: 'argument': conversion from '_Ty' to 'unsigned char', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(467,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(468,74): warning C4244: 'argument': conversion from '_Ty' to 'unsigned char', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(468,59): warning C4244: 'argument': conversion from '_Ty' to 'unsigned char', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(468,59): warning C4244: 'argument': conversion from '_Ty' to 'unsigned char', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(468,44): warning C4244: 'argument': conversion from '_Ty' to 'unsigned char', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(468,44): warning C4244: 'argument': conversion from '_Ty' to 'unsigned char', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\utils.cpp(468,29): warning C4244: 'argument': conversion from '_Ty' to 'unsigned char', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\utils.cpp(468,29): warning C4244: 'argument': conversion from '_Ty' to 'unsigned char', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\material.cpp(24,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\main.cpp(109,76): warning C4244: 'argument': conversion from 'float' to 'ImGuiColorEditFlags', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\main.cpp(110,76): warning C4244: 'argument': conversion from 'float' to 'ImGuiColorEditFlags', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\main.cpp(111,78): warning C4244: 'argument': conversion from 'float' to 'ImGuiColorEditFlags', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\main.cpp(114,59): warning C4129: 'M': unrecognized character escape sequence
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\main.cpp(179,46): warning C4244: '=': conversion from 'Sint32' to 'float', possible loss of data
-C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\src\main.cpp(221,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(66,34): warning C4552: '/': result of expression not used
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(78,34): warning C4552: '/': result of expression not used
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(163,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(164,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(165,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(167,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(168,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(169,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(171,14): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(172,11): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(181,10): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(190,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(191,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(192,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(193,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(216,27): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(248,35): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\src\volume.cpp(267,13): warning C4244: 'initializing': conversion from 'float' to 'Uint8', possible loss of data
+  tritri.c
+  imgui_draw.cpp
 animation.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
 LINK : warning LNK4217: symbol '___glewActiveTexture' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_RenderDrawData(struct ImDrawData *)" (?ImGui_ImplOpenGL3_RenderDrawData@@YAXPAUImDrawData@@@Z)'
@@ -116,5 +257,5 @@ LINK : warning LNK4217: symbol '___glewBindSampler' defined in 'glew32s.lib(glew
 LINK : warning LNK4217: symbol '___glewBindVertexArray' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl ImGui_ImplOpenGL3_CreateDeviceObjects(void)" (?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ)'
 LINK : warning LNK4217: symbol '___glewDeleteVertexArrays' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_RenderDrawData(struct ImDrawData *)" (?ImGui_ImplOpenGL3_RenderDrawData@@YAXPAUImDrawData@@@Z)'
 LINK : warning LNK4217: symbol '___glewGenVertexArrays' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_RenderDrawData(struct ImDrawData *)" (?ImGui_ImplOpenGL3_RenderDrawData@@YAXPAUImDrawData@@@Z)'
-glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\vc120.pdb'; linking object as if no debug info
-  visualstudio.vcxproj -> C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 1 - Copy\ACG-Framework-master\framework_debug.exe
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\vc120.pdb'; linking object as if no debug info
+  visualstudio.vcxproj -> C:\Users\Juan S. Marquerie\Documents\Advanced-Computer-Graphics-2021\Practice 2 PBR+IBL\framework_debug.exe

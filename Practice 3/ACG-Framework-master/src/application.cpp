@@ -15,6 +15,7 @@
 #include <cmath>
 #include "scene_data.h"
 #include "skybox_node.h"
+#include "volumetric_node.h"
 
 bool render_wireframe = false;
 Camera* Application::camera = nullptr;
@@ -50,12 +51,8 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 
 	// Scene setup
 	{
-		SkyboxNode* skybox_node = new SkyboxNode();
-		node_list.push_back(skybox_node);
-
-		// Test volume data
-		Volume volume;
-		volume.loadPNG("data/volumes/bonsai_16_16.png");
+		//VolumetricNode vol();
+		node_list.push_back(new VolumetricNode());
 
 		// Light setup
 		scene_data.light.diffuse = Vector3{ 1.0f, 1.0f, 1.0f } * 0.5f;
@@ -63,30 +60,6 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		scene_data.light.ambient = Vector3{ 1.0f, 1.0f, 1.0f } * 0.3;
 		scene_data.light.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		scene_data.light.position = { 5.0f, 5.0f, 5.0f };
-		
-		TexturedMaterial* text_mat = new TexturedMaterial("data/blueNoise.png");
-		text_mat->color = { 0.0f, 1.0f, 0.0f, 1.0f };
-		SceneNode* text_node = new SceneNode("Textured node");
-		text_node->model.setTranslation(-3.0f, 0.0f, 0.0f);
-		text_node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
-		text_node->material = text_mat;
-		node_list.push_back(text_node);
-
-		PhongMaterial* phong_mat = new PhongMaterial();
-		phong_mat->color = { 1.0f, 0.0f, 0.0f, 1.0f };
-		SceneNode* phong_node = new SceneNode("Phong node");
-		phong_node->model.setTranslation(0.0f, 0.0f, 0.0f);
-		phong_node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
-		phong_node->material = phong_mat;
-		node_list.push_back(phong_node);
-
-		ReflectiveMaterial* ref_mat = new ReflectiveMaterial();
-		ref_mat->color = { 1.0f, 1.0f, 1.0f, 1.0f };
-		SceneNode* ref_node = new SceneNode("Reflective node");
-		ref_node->model.setTranslation(3.0f, 0.0f, 0.0f);
-		ref_node->mesh = Mesh::Get("data/meshes/sphere.obj.mbin");
-		ref_node->material = ref_mat;
-		node_list.push_back(ref_node);
 	}
 	
 	//hide the cursor
@@ -145,8 +118,8 @@ void Application::update(double seconds_elapsed)
 	if (Input::isKeyPressed(SDL_SCANCODE_S) || Input::isKeyPressed(SDL_SCANCODE_DOWN)) camera->move(Vector3(0.0f, 0.0f,-1.0f) * speed);
 	if (Input::isKeyPressed(SDL_SCANCODE_A) || Input::isKeyPressed(SDL_SCANCODE_LEFT)) camera->move(Vector3(1.0f, 0.0f, 0.0f) * speed);
 	if (Input::isKeyPressed(SDL_SCANCODE_D) || Input::isKeyPressed(SDL_SCANCODE_RIGHT)) camera->move(Vector3(-1.0f, 0.0f, 0.0f) * speed);
-	if (Input::isKeyPressed(SDL_SCANCODE_SPACE)) camera->moveGlobal(Vector3(0.0f, -1.0f, 0.0f) * speed);
-	if (Input::isKeyPressed(SDL_SCANCODE_LCTRL)) camera->moveGlobal(Vector3(0.0f,  1.0f, 0.0f) * speed);
+	//if (Input::isKeyPressed(SDL_SCANCODE_SPACE)) camera->moveGlobal(Vector3(0.0f, -1.0f, 0.0f) * speed);
+	//if (Input::isKeyPressed(SDL_SCANCODE_LCTRL)) camera->moveGlobal(Vector3(0.0f,  1.0f, 0.0f) * speed);
 
 	//to navigate with the mouse fixed in the middle
 	if (mouse_locked)

@@ -171,6 +171,7 @@
     <ClCompile Include="..\..\src\texture.cpp" />
     <ClCompile Include="..\..\src\utils.cpp" />
     <ClCompile Include="..\..\src\volume.cpp" />
+    <ClCompile Include="..\..\src\volumetric_node.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\animation.h" />
@@ -225,6 +226,7 @@
     <ClInclude Include="..\..\src\scene_data.h">
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="..\..\src\volumetric_node.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

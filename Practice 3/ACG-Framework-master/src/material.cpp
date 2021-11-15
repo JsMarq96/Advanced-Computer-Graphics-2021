@@ -176,3 +176,25 @@ void ReflectiveMaterial::setUniforms(Camera* camera, Matrix44 model) {
 void ReflectiveMaterial::renderInMenu() {
 	ImGui::SliderFloat("Reflectiveness", &reflectiveness, 0.0f, 1.0f);
 }
+
+// VOLUMETRIC MATERIAL
+VolumetricMaterial::VolumetricMaterial() {
+	shader = Shader::Get("data/shaders/volumetric.vs", "data/shaders/volumetric.fs");
+	texture = new Texture();
+}
+
+void VolumetricMaterial::setVolume(const char* vol_dir) {
+	Volume vol;
+	vol.loadPNG(vol_dir);
+
+	texture->create3DFromVolume(&vol);
+
+	vol.clear();
+}
+
+void VolumetricMaterial::setUniforms(Camera* camera, Matrix44 model) {
+	shader->setUniform("u_light_color", scene_data.light.color);
+	shader->setUniform("u_light_position", scene_data.light.position);
+
+	StandardMaterial::setUniforms(camera, model);
+}

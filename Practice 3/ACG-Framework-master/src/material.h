@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "mesh.h"
 #include "extra/hdre.h"
+#include "volume.h"
 
 #include "scene_data.h"
 
@@ -91,6 +92,16 @@ public:
 
 	void setUniforms(Camera* camera, Matrix44 model);
 	void renderInMenu();
+};
+
+
+class VolumetricMaterial : public StandardMaterial {
+public:
+	VolumetricMaterial();
+
+	void setVolume(const char* vol_dir);
+
+	void setUniforms(Camera* camera, Matrix44 model);
 };
 
 #endif
