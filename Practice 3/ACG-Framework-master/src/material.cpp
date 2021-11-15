@@ -181,6 +181,7 @@ void ReflectiveMaterial::renderInMenu() {
 VolumetricMaterial::VolumetricMaterial() {
 	shader = Shader::Get("data/shaders/volumetric.vs", "data/shaders/volumetric.fs");
 	texture = new Texture();
+	noise_tex = Texture::Get("data/blueNoise.png");
 }
 
 void VolumetricMaterial::setVolume(const char* vol_dir) {
@@ -199,10 +200,22 @@ void VolumetricMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	shader->setUniform("u_brightness", brightness);
 	shader->setUniform("u_step_size", ray_step_size);
 
+	// Noise texture for jittering
+	if (noise_tex) {
+		shader->setUniform("u_noise_tex", noise_tex);
+		shader->setUniform1("u_noise_size", 128);
+	}
+
+	// Isosurfaces
+	shader->setUniform("u_iso_threshold", isosurf_threhold);
+	shader->setUniform("u_gradient_delta", gradient_delta);
+
 	StandardMaterial::setUniforms(camera, model);
 }
 
 void VolumetricMaterial::renderInMenu() {
 	ImGui::SliderFloat("Brightness: ", &brightness, 0.001f, 3.0f);
 	ImGui::SliderFloat("Step size: ", &ray_step_size, 0.01f, 0.1f);
+	ImGui::SliderFloat("Isosurface threshold: ", &isosurf_threhold, 0.0001f, 1.0f);
+	ImGui::SliderFloat("Gradient delta: ", &gradient_delta, 0.0001f, 0.1f);
 }
