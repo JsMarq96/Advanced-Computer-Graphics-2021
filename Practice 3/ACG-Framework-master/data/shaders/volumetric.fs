@@ -4,6 +4,7 @@ varying vec3 v_normal;
 varying vec2 v_uv;
 varying vec4 v_color;
 
+uniform float u_brightness;
 uniform float u_step_size;
 uniform vec3 u_camera_position;
 uniform vec4 u_color;
@@ -42,6 +43,8 @@ void main(){
 
         it_position = it_position + (ray_dir * u_step_size);
 	}
+
+	final_color.rgb = final_color.rgb * u_brightness;
 	
 	gl_FragColor = final_color;
 }

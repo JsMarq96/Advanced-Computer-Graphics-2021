@@ -196,11 +196,13 @@ void VolumetricMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	shader->setUniform("u_light_color", scene_data.light.color);
 	shader->setUniform("u_light_position", scene_data.light.position);
 
-	shader->setUniform("u_step_size", step_size);
+	shader->setUniform("u_brightness", brightness);
+	shader->setUniform("u_step_size", ray_step_size);
 
 	StandardMaterial::setUniforms(camera, model);
 }
 
 void VolumetricMaterial::renderInMenu() {
+	ImGui::SliderFloat("Brightness: ", &brightness, 0.001f, 3.0f);
 	ImGui::SliderFloat("Step size: ", &ray_step_size, 0.01f, 0.1f);
 }

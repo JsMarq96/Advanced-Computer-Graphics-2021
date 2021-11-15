@@ -97,8 +97,8 @@ public:
 
 class VolumetricMaterial : public StandardMaterial {
 public:
+	float brightness = 1.0f;
 	float ray_step_size = 0.06;
-	int num_steps = 100;
 
 	VolumetricMaterial();
 

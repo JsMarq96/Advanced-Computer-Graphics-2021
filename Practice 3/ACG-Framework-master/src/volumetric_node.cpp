@@ -6,9 +6,11 @@ VolumetricNode::VolumetricNode() {
 
 	mesh = new Mesh();
 	mesh->createCube();
+
+	name = "Volumetric Node";
 }
 
 
 void VolumetricNode::renderInMenu() {
-
+	SceneNode::renderInMenu();
 }
