@@ -97,11 +97,16 @@ public:
 
 class VolumetricMaterial : public StandardMaterial {
 public:
+	float ray_step_size = 0.06;
+	int num_steps = 100;
+
 	VolumetricMaterial();
 
 	void setVolume(const char* vol_dir);
 
 	void setUniforms(Camera* camera, Matrix44 model);
+
+	void renderInMenu();
 };
 
 #endif

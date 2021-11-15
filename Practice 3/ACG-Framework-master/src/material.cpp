@@ -187,7 +187,7 @@ void VolumetricMaterial::setVolume(const char* vol_dir) {
 	Volume vol;
 	vol.loadPNG(vol_dir);
 
-	texture->create3DFromVolume(&vol);
+	texture->create3DFromVolume(&vol, GL_CLAMP_TO_BORDER);
 
 	vol.clear();
 }
@@ -196,5 +196,11 @@ void VolumetricMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	shader->setUniform("u_light_color", scene_data.light.color);
 	shader->setUniform("u_light_position", scene_data.light.position);
 
+	shader->setUniform("u_step_size", step_size);
+
 	StandardMaterial::setUniforms(camera, model);
+}
+
+void VolumetricMaterial::renderInMenu() {
+	ImGui::SliderFloat("Step size: ", &ray_step_size, 0.01f, 0.1f);
 }
