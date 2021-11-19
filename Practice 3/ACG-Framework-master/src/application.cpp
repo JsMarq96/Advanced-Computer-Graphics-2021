@@ -59,7 +59,7 @@ Application::Application(int window_width, int window_height, SDL_Window* window
 		scene_data.light.specular = Vector3{ 1.0f, 1.0f, 1.0f } * 0.6f;
 		scene_data.light.ambient = Vector3{ 1.0f, 1.0f, 1.0f } * 0.3;
 		scene_data.light.color = { 1.0f, 1.0f, 1.0f, 1.0f };
-		scene_data.light.position = { 5.0f, 5.0f, 5.0f };
+		scene_data.light.position = { 5.0f, -15.0f, 5.0f };
 	}
 	
 	//hide the cursor

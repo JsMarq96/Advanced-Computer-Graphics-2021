@@ -5,6 +5,8 @@ attribute vec4 a_color;
 
 uniform mat4 u_model;
 uniform mat4 u_viewprojection;
+uniform vec3 u_camera_position;
+uniform vec3 u_light_position;
 
 //this will store the color for the pixel shader
 varying vec3 v_position;
@@ -12,6 +14,8 @@ varying vec3 v_world_position;
 varying vec3 v_normal;
 varying vec2 v_uv;
 varying vec4 v_color;
+varying vec3 v_local_cam_pos;
+varying vec3 v_local_light_position;
 
 void main()
 {	
@@ -21,6 +25,12 @@ void main()
 	//calcule the vertex in object space
 	v_position = a_vertex;
 	v_world_position = (u_model * vec4( v_position, 1.0) ).xyz;
+
+	mat4 inv_model = inverse(u_model);
+
+	v_local_cam_pos = (inv_model * vec4( u_camera_position, 1.0) ).xyz;
+
+	v_local_light_position = (inv_model * vec4(u_light_position, 1.0) ).xyz;
 	
 	//store the color in the varying var to use it from the pixel shader
 	v_color = a_color;

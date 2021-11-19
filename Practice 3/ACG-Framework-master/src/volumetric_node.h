@@ -6,16 +6,20 @@
 #include "scenenode.h"
 
 static const char* VOLUMES_DIR[3] = {
-	"data/volumes/bonsai_16_16.png"
+	"data/volumes/bonsai_16_16.png",
+	"data/volumes/teapot_16_16.png",
+	"data/volumes/foot_16_16.png"
 };
 
 static const char* VOLUMES_NAME[3] = {
-	"BONSAI"
+	"BONSAI",
+	"TEAPOT",
+	"FOOT"
 };
 
 class VolumetricNode : public SceneNode {
 public:
-	int volume_id = 0;
+	int volume_id = 1;
 
 	VolumetricNode();
 

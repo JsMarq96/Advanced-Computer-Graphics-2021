@@ -203,7 +203,7 @@ void VolumetricMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	// Noise texture for jittering
 	if (noise_tex) {
 		shader->setUniform("u_noise_tex", noise_tex);
-		shader->setUniform1("u_noise_size", 128);
+		shader->setUniform("u_noise_size", noise_tex->image.width);
 	}
 
 	// Isosurfaces
