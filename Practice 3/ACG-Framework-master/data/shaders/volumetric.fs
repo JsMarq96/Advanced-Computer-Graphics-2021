@@ -93,7 +93,7 @@ vec4 render_isosurface() {
 
 	// Add noise to aboud jitter
 	float noise_sample = normalize(texture(u_noise_tex, gl_FragCoord.xy / u_noise_size)).r;
-	it_position = it_position + (noise_sample * ray_dir);
+	it_position = it_position + (noise_sample * ray_dir * u_step_size);
 
 	// Ray loop
 	for(int i = 0; i < MAX_ITERATIONS; i++){
@@ -110,7 +110,9 @@ vec4 render_isosurface() {
 			break;
 		}
 		
-        float depth = texture(u_texture, sample_position).x;
+        vec4 d_vec = texture(u_texture, sample_position);
+
+		float depth = d_vec.x;
 
 		if (depth >= u_iso_threshold) {
 			//return vec4(1.0);
@@ -139,5 +141,10 @@ vec4 render_isosurface() {
 void main(){
     vec4 final_color = render_isosurface();
 	final_color.rgb = final_color.rgb * u_brightness;
+
+	if (final_color.a < 0.01) {
+		discard;
+	}
+
 	gl_FragColor = final_color;
 }
