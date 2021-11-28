@@ -99,10 +99,13 @@ class VolumetricMaterial : public StandardMaterial {
 public:
 	Texture *noise_tex = NULL;
 	float brightness = 1.0f;
-	float ray_step_size = 0.06f;
+	float ray_step_size = 0.016f;
 
-	float isosurf_threhold = 0.5f;
-	float gradient_delta = 0.001f;
+	float isosurf_threhold = 0.124f;
+	float gradient_delta = 0.003f;
+
+	vec3 plane_origin = vec3(0.0f, 3.0f, 0.0f);
+	vec3 plane_rotation = vec3(0.0f, 1.0f, 0.0f);
 
 	VolumetricMaterial();
 

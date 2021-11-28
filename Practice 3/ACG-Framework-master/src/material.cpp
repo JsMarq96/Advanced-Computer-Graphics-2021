@@ -200,6 +200,9 @@ void VolumetricMaterial::setUniforms(Camera* camera, Matrix44 model) {
 	shader->setUniform("u_brightness", brightness);
 	shader->setUniform("u_step_size", ray_step_size);
 
+	shader->setUniform("u_plane_origin", plane_origin);
+	shader->setUniform("u_plane_direction", plane_rotation);
+
 	// Noise texture for jittering
 	if (noise_tex) {
 		shader->setUniform("u_noise_tex", noise_tex);
@@ -218,4 +221,7 @@ void VolumetricMaterial::renderInMenu() {
 	ImGui::SliderFloat("Step size: ", &ray_step_size, 0.01f, 0.1f);
 	ImGui::SliderFloat("Isosurface threshold: ", &isosurf_threhold, 0.0001f, 1.0f);
 	ImGui::SliderFloat("Gradient delta: ", &gradient_delta, 0.0001f, 0.1f);
+
+	ImGui::SliderFloat3("Plane origin: ", &plane_origin.x, -1.0, 2.0);
+	ImGui::SliderFloat3("Plane normal: ", &plane_rotation.x, -1.0, 2.0);
 }
